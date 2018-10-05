@@ -21,17 +21,17 @@
 </div>
 <div>
 <H1>Inserci&oacute;n Masiva de datos</H1><br />
-<form action="masivo_insertar.php">
-<fieldset id="bd">
-  <input type="radio" name="bd" value="Cassandra" checked > Cassandra </input>
-  <input type="radio" name="bd" value="MongoDB"> MongoDB</input>
-  <input type="radio" name="bd" value="MySQL"> MySQL o MariaDB</input>
- </fieldset> 
-  Cantidad de registros:<br />
-  <input type="text" name="registros" value="100"  maxlength="7">
-  
-  <button class="button blue">Generar</button>
-</form>
+	<form action="masivo_insertar.php">
+		<fieldset id="bd">
+			<input type="radio" name="bd" value="Cassandra" checked > Cassandra </input>
+			<input type="radio" name="bd" value="MongoDB"> MongoDB</input>
+			<input type="radio" name="bd" value="MySQL"> MySQL o MariaDB</input>
+		</fieldset> 
+		Cantidad de registros:<br />
+		<input type="text" name="registros" value="100"  maxlength="7">
+		
+		<button class="button blue">Generar</button>
+	</form>
 </div>
 </body>
 </html>
