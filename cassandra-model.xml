@@ -1,0 +1,596 @@
+<KDMPROJECT>
+  <ERMODEL>
+    <mxGraphModel grid="1" guides="1" tooltips="1" connect="1" fold="1" page="0" pageScale="1" pageWidth="826" pageHeight="1169">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="2" value="Fotodeteccion" style="whiteSpace=wrap" vertex="1" parent="1">
+          <mxGeometry x="240" y="140" width="100" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="3" value="Lugar" style="ellipse" vertex="1" parent="1">
+          <mxGeometry x="140" y="60" width="80" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="5" value="Placa" style="ellipse;fontStyle=4" vertex="1" parent="1">
+          <mxGeometry x="240" y="60" width="80" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="6" value="Velocidad" style="ellipse" vertex="1" parent="1">
+          <mxGeometry x="340" y="60" width="80" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="8" value="Hora" style="ellipse;fontStyle=4" vertex="1" parent="1">
+          <mxGeometry x="70" y="105" width="80" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="9" value="Fecha" style="ellipse;fontStyle=4" vertex="1" parent="1">
+          <mxGeometry x="420" y="105" width="80" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="10" style="exitX=1;exitY=1" edge="1" parent="1" source="8" target="2">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="11" style="exitX=0.5;exitY=1;entryX=0.25;entryY=0" edge="1" parent="1" source="3" target="2">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="12" style="exitX=0.5;exitY=1" edge="1" parent="1" source="5" target="2">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="13" style="exitX=0.5;exitY=1;entryX=0.75;entryY=0" edge="1" parent="1" source="6" target="2">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="14" style="exitX=0;exitY=1" edge="1" parent="1" source="9" target="2">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+    <KEYS_JSON>
+{}    </KEYS_JSON>
+  </ERMODEL>
+  <ACCESS_PATTERNS width="1150px" height="" left="254px" top="195px">
+    <Q1>
+      <APTYPE>
+simple      </APTYPE>
+      <GR>
+        <ATTRIBUTE>
+          <DIV>
+Fotodeteccion.Placa          </DIV>
+        </ATTRIBUTE>
+        <VRS>
+value        </VRS>
+      </GR>
+      <GR>
+        <ATTRIBUTE>
+          <DIV>
+Fotodeteccion.Fecha          </DIV>
+        </ATTRIBUTE>
+        <VRS>
+range        </VRS>
+      </GR>
+      <GR>
+        <ATTRIBUTE>
+          <DIV>
+Fotodeteccion.Velocidad          </DIV>
+        </ATTRIBUTE>
+        <VRS>
+range        </VRS>
+      </GR>
+      <FR>
+        <ATTRIBUTE>
+          <DIV>
+Fotodeteccion.Fecha          </DIV>
+        </ATTRIBUTE>
+        <ORDERBY>
+ASC        </ORDERBY>
+      </FR>
+      <FR>
+        <ATTRIBUTE>
+          <DIV>
+Fotodeteccion.Hora          </DIV>
+        </ATTRIBUTE>
+        <ORDERBY>
+ASC        </ORDERBY>
+      </FR>
+      <FR>
+        <ATTRIBUTE>
+          <DIV>
+Fotodeteccion.Lugar          </DIV>
+        </ATTRIBUTE>
+        <ORDERBY>
+ASC        </ORDERBY>
+      </FR>
+      <DESCR>
+(CONSULTA DE USUARIO) -- Dada el vehículo(placas) y rango de fechas, se puede consultar las infracciones (mas de 80km). Listando fecha, hora, lugar.      </DESCR>
+    </Q1>
+    <Q2>
+      <APTYPE>
+simple      </APTYPE>
+      <GR>
+        <ATTRIBUTE>
+          <DIV>
+Fotodeteccion.Fecha          </DIV>
+        </ATTRIBUTE>
+        <VRS>
+value        </VRS>
+      </GR>
+      <GR>
+        <ATTRIBUTE>
+          <DIV>
+Fotodeteccion.Placa          </DIV>
+        </ATTRIBUTE>
+        <VRS>
+value        </VRS>
+      </GR>
+      <FR>
+        <ATTRIBUTE>
+          <DIV>
+Fotodeteccion.Lugar          </DIV>
+        </ATTRIBUTE>
+        <CNT/>
+      </FR>
+      <FR>
+        <ATTRIBUTE>
+          <DIV>
+Fotodeteccion.Lugar          </DIV>
+        </ATTRIBUTE>
+        <ORDERBY>
+ASC        </ORDERBY>
+      </FR>
+      <DESCR>
+(CONSULTA DE USUARIO) --Dada el año, mes y el vehículo(placas), se puede consultar las estadísticas de total de pasos por cada lugar. Listando lugar y número de pasadas (Note que este es un consolidado mensual).      </DESCR>
+    </Q2>
+    <Q3>
+      <APTYPE>
+simple      </APTYPE>
+      <GR>
+        <ATTRIBUTE>
+          <DIV>
+Fotodeteccion.Fecha          </DIV>
+        </ATTRIBUTE>
+        <VRS>
+value        </VRS>
+      </GR>
+      <GR>
+        <ATTRIBUTE>
+          <DIV>
+Fotodeteccion.Lugar          </DIV>
+        </ATTRIBUTE>
+        <VRS>
+value        </VRS>
+      </GR>
+      <FR>
+        <ATTRIBUTE>
+          <DIV>
+Fotodeteccion.Hora          </DIV>
+        </ATTRIBUTE>
+        <ORDERBY>
+ASC        </ORDERBY>
+      </FR>
+      <FR>
+        <ATTRIBUTE>
+          <DIV>
+Fotodeteccion.Velocidad          </DIV>
+        </ATTRIBUTE>
+        <ORDERBY>
+ASC        </ORDERBY>
+      </FR>
+      <FR>
+        <ATTRIBUTE>
+          <DIV>
+Fotodeteccion.Placa          </DIV>
+        </ATTRIBUTE>
+      </FR>
+      <DESCR>
+(CONSULTA AGENTE) --Dada una fecha y lugar se puede consultar las horas del día, vehículo(placas) y velocidad      </DESCR>
+    </Q3>
+    <Q4>
+      <APTYPE>
+simple      </APTYPE>
+      <GR>
+        <ATTRIBUTE>
+          <DIV>
+Fotodeteccion.Fecha          </DIV>
+        </ATTRIBUTE>
+        <VRS>
+value        </VRS>
+      </GR>
+      <GR>
+        <ATTRIBUTE>
+          <DIV>
+Fotodeteccion.Velocidad          </DIV>
+        </ATTRIBUTE>
+        <VRS>
+range        </VRS>
+      </GR>
+      <FR>
+        <ATTRIBUTE>
+          <DIV>
+Fotodeteccion.Placa          </DIV>
+        </ATTRIBUTE>
+      </FR>
+      <FR>
+        <ATTRIBUTE>
+          <DIV>
+Fotodeteccion.Hora          </DIV>
+        </ATTRIBUTE>
+        <ORDERBY>
+ASC        </ORDERBY>
+      </FR>
+      <FR>
+        <ATTRIBUTE>
+          <DIV>
+Fotodeteccion.Lugar          </DIV>
+        </ATTRIBUTE>
+        <ORDERBY>
+ASC        </ORDERBY>
+      </FR>
+      <DESCR>
+(CONSULTA AGENTE) --Dado una fecha se puede consultar los vehículos(placas) que sobrepasaron 80km, listando hora del día, lugar y placa.      </DESCR>
+    </Q4>
+  </ACCESS_PATTERNS>
+  <LOGICAL_MODEL>
+    <Q1 qTemplate="SELECT |s|Fotodeteccion__Fecha|e|, |s|Fotodeteccion__Hora|e|, |s|Fotodeteccion__Lugar|e| FROM |s|tableName|e| WHERE |s|Fotodeteccion__Placa|e|=? and |s|Fotodeteccion__Velocidad|e|=? and |s|Fotodeteccion__Fecha|e|&gt;? ORDER BY |s|Fotodeteccion__Fecha|e| ASC, |s|Fotodeteccion__Hora|e| ASC, |s|Fotodeteccion__Lugar|e| ASC;">
+      <tbl>
+        <table0/>
+        <columns>
+          <placa origName="Fotodeteccion__Placa">
+            <K/>
+            <NOCLUST/>
+          </placa>
+          <velocidad origName="Fotodeteccion__Velocidad">
+            <K/>
+            <NOCLUST/>
+          </velocidad>
+          <fecha origName="Fotodeteccion__Fecha">
+            <C>
+ASC              <expl/>
+            </C>
+          </fecha>
+          <hora origName="Fotodeteccion__Hora">
+            <C>
+ASC              <expl/>
+            </C>
+          </hora>
+          <lugar origName="Fotodeteccion__Lugar">
+            <C>
+ASC              <expl/>
+            </C>
+          </lugar>
+        </columns>
+      </tbl>
+      <tbl>
+        <table1/>
+        <columns>
+          <velocidad origName="Fotodeteccion__Velocidad">
+            <K/>
+            <NOCLUST/>
+          </velocidad>
+          <placa origName="Fotodeteccion__Placa">
+            <K/>
+            <NOCLUST/>
+          </placa>
+          <fecha origName="Fotodeteccion__Fecha">
+            <C>
+ASC              <expl/>
+            </C>
+          </fecha>
+          <hora origName="Fotodeteccion__Hora">
+            <C>
+ASC              <expl/>
+            </C>
+          </hora>
+          <lugar origName="Fotodeteccion__Lugar">
+            <C>
+ASC              <expl/>
+            </C>
+          </lugar>
+        </columns>
+      </tbl>
+      <tbl>
+        <table2/>
+        <columns>
+          <placa origName="Fotodeteccion__Placa">
+            <K/>
+            <NOCLUST/>
+          </placa>
+          <velocidad origName="Fotodeteccion__Velocidad">
+            <C>
+ASC              <expl/>
+            </C>
+          </velocidad>
+          <fecha origName="Fotodeteccion__Fecha">
+            <C>
+ASC              <expl/>
+            </C>
+          </fecha>
+          <hora origName="Fotodeteccion__Hora">
+            <C>
+ASC              <expl/>
+            </C>
+          </hora>
+          <lugar origName="Fotodeteccion__Lugar">
+            <C>
+ASC              <expl/>
+            </C>
+          </lugar>
+        </columns>
+      </tbl>
+      <tbl>
+        <table3/>
+        <columns>
+          <velocidad origName="Fotodeteccion__Velocidad">
+            <K/>
+            <NOCLUST/>
+          </velocidad>
+          <placa origName="Fotodeteccion__Placa">
+            <C>
+ASC              <expl/>
+            </C>
+          </placa>
+          <fecha origName="Fotodeteccion__Fecha">
+            <C>
+ASC              <expl/>
+            </C>
+          </fecha>
+          <hora origName="Fotodeteccion__Hora">
+            <C>
+ASC              <expl/>
+            </C>
+          </hora>
+          <lugar origName="Fotodeteccion__Lugar">
+            <C>
+ASC              <expl/>
+            </C>
+          </lugar>
+        </columns>
+      </tbl>
+    </Q1>
+    <Q2 qTemplate="SELECT |s|Fotodeteccion__Lugar|e|, |s|Fotodeteccion__Lugar|e| FROM |s|tableName|e| WHERE |s|Fotodeteccion__Placa|e|=? and |s|Fotodeteccion__Fecha|e|=? ORDER BY |s|Fotodeteccion__Lugar|e| ASC;">
+      <tbl>
+        <fotodeteccions_by_placa/>
+        <columns>
+          <placa origName="Fotodeteccion__Placa">
+            <K/>
+            <NOCLUST/>
+          </placa>
+          <fecha origName="Fotodeteccion__Fecha">
+            <K/>
+            <NOCLUST/>
+          </fecha>
+          <fotodeteccion_lugar origName="Fotodeteccion__Lugar">
+            <C>
+ASC              <expl/>
+            </C>
+          </fotodeteccion_lugar>
+          <hora origName="Fotodeteccion__Hora">
+            <C>
+ASC            </C>
+          </hora>
+          <fotodeteccion_lugar origName="Fotodeteccion__Lugar">
+            <CNT/>
+            <NOCLUST/>
+          </fotodeteccion_lugar>
+        </columns>
+      </tbl>
+      <tbl>
+        <fotodeteccions_by_placa1/>
+        <columns>
+          <fecha origName="Fotodeteccion__Fecha">
+            <K/>
+            <NOCLUST/>
+          </fecha>
+          <placa origName="Fotodeteccion__Placa">
+            <K/>
+            <NOCLUST/>
+          </placa>
+          <fotodeteccion_lugar origName="Fotodeteccion__Lugar">
+            <C>
+ASC              <expl/>
+            </C>
+          </fotodeteccion_lugar>
+          <hora origName="Fotodeteccion__Hora">
+            <C>
+ASC            </C>
+          </hora>
+          <fotodeteccion_lugar origName="Fotodeteccion__Lugar">
+            <CNT/>
+            <NOCLUST/>
+          </fotodeteccion_lugar>
+        </columns>
+      </tbl>
+      <tbl>
+        <fotodeteccions_by_placa2/>
+        <columns>
+          <placa origName="Fotodeteccion__Placa">
+            <K/>
+            <NOCLUST/>
+          </placa>
+          <fecha origName="Fotodeteccion__Fecha">
+            <C>
+ASC              <expl/>
+            </C>
+          </fecha>
+          <fotodeteccion_lugar origName="Fotodeteccion__Lugar">
+            <C>
+ASC              <expl/>
+            </C>
+          </fotodeteccion_lugar>
+          <hora origName="Fotodeteccion__Hora">
+            <C>
+ASC            </C>
+          </hora>
+          <fotodeteccion_lugar origName="Fotodeteccion__Lugar">
+            <CNT/>
+            <NOCLUST/>
+          </fotodeteccion_lugar>
+        </columns>
+      </tbl>
+      <tbl>
+        <fotodeteccions_by_placa3/>
+        <columns>
+          <fecha origName="Fotodeteccion__Fecha">
+            <K/>
+            <NOCLUST/>
+          </fecha>
+          <placa origName="Fotodeteccion__Placa">
+            <C>
+ASC              <expl/>
+            </C>
+          </placa>
+          <fotodeteccion_lugar origName="Fotodeteccion__Lugar">
+            <C>
+ASC              <expl/>
+            </C>
+          </fotodeteccion_lugar>
+          <hora origName="Fotodeteccion__Hora">
+            <C>
+ASC            </C>
+          </hora>
+          <fotodeteccion_lugar origName="Fotodeteccion__Lugar">
+            <CNT/>
+            <NOCLUST/>
+          </fotodeteccion_lugar>
+        </columns>
+      </tbl>
+    </Q2>
+    <Q3 qTemplate="SELECT |s|Fotodeteccion__Hora|e|, |s|Fotodeteccion__Velocidad|e|, |s|Fotodeteccion__Placa|e| FROM |s|tableName|e| WHERE |s|Fotodeteccion__Fecha|e|=? and |s|Fotodeteccion__Lugar|e|=? ORDER BY |s|Fotodeteccion__Hora|e| ASC, |s|Fotodeteccion__Velocidad|e| ASC;">
+      <tbl>
+        <fotodeteccions_by_fecha/>
+        <columns>
+          <fecha origName="Fotodeteccion__Fecha">
+            <K/>
+            <NOCLUST/>
+          </fecha>
+          <lugar origName="Fotodeteccion__Lugar">
+            <K/>
+            <NOCLUST/>
+          </lugar>
+          <hora origName="Fotodeteccion__Hora">
+            <C>
+ASC              <expl/>
+            </C>
+          </hora>
+          <velocidad origName="Fotodeteccion__Velocidad">
+            <C>
+ASC              <expl/>
+            </C>
+          </velocidad>
+          <placa origName="Fotodeteccion__Placa">
+            <C>
+ASC            </C>
+          </placa>
+        </columns>
+      </tbl>
+      <tbl>
+        <fotodeteccions_by_fecha1/>
+        <columns>
+          <lugar origName="Fotodeteccion__Lugar">
+            <K/>
+            <NOCLUST/>
+          </lugar>
+          <fecha origName="Fotodeteccion__Fecha">
+            <K/>
+            <NOCLUST/>
+          </fecha>
+          <hora origName="Fotodeteccion__Hora">
+            <C>
+ASC              <expl/>
+            </C>
+          </hora>
+          <velocidad origName="Fotodeteccion__Velocidad">
+            <C>
+ASC              <expl/>
+            </C>
+          </velocidad>
+          <placa origName="Fotodeteccion__Placa">
+            <C>
+ASC            </C>
+          </placa>
+        </columns>
+      </tbl>
+      <tbl>
+        <fotodeteccions_by_fecha2/>
+        <columns>
+          <fecha origName="Fotodeteccion__Fecha">
+            <K/>
+            <NOCLUST/>
+          </fecha>
+          <lugar origName="Fotodeteccion__Lugar">
+            <C>
+ASC              <expl/>
+            </C>
+          </lugar>
+          <hora origName="Fotodeteccion__Hora">
+            <C>
+ASC              <expl/>
+            </C>
+          </hora>
+          <velocidad origName="Fotodeteccion__Velocidad">
+            <C>
+ASC              <expl/>
+            </C>
+          </velocidad>
+          <placa origName="Fotodeteccion__Placa">
+            <C>
+ASC            </C>
+          </placa>
+        </columns>
+      </tbl>
+      <tbl>
+        <fotodeteccions_by_fecha3/>
+        <columns>
+          <lugar origName="Fotodeteccion__Lugar">
+            <K/>
+            <NOCLUST/>
+          </lugar>
+          <fecha origName="Fotodeteccion__Fecha">
+            <C>
+ASC              <expl/>
+            </C>
+          </fecha>
+          <hora origName="Fotodeteccion__Hora">
+            <C>
+ASC              <expl/>
+            </C>
+          </hora>
+          <velocidad origName="Fotodeteccion__Velocidad">
+            <C>
+ASC              <expl/>
+            </C>
+          </velocidad>
+          <placa origName="Fotodeteccion__Placa">
+            <C>
+ASC            </C>
+          </placa>
+        </columns>
+      </tbl>
+    </Q3>
+    <Q4 qTemplate="SELECT |s|Fotodeteccion__Hora|e|, |s|Fotodeteccion__Lugar|e|, |s|Fotodeteccion__Placa|e| FROM |s|tableName|e| WHERE |s|Fotodeteccion__Fecha|e|=? and |s|Fotodeteccion__Velocidad|e|&gt;? ORDER BY |s|Fotodeteccion__Hora|e| ASC, |s|Fotodeteccion__Lugar|e| ASC;">
+      <tbl>
+        <fotodeteccions_by_fecha0/>
+        <columns>
+          <fecha origName="Fotodeteccion__Fecha">
+            <K/>
+            <NOCLUST/>
+          </fecha>
+          <velocidad origName="Fotodeteccion__Velocidad">
+            <C>
+ASC              <expl/>
+            </C>
+          </velocidad>
+          <hora origName="Fotodeteccion__Hora">
+            <C>
+ASC              <expl/>
+            </C>
+          </hora>
+          <lugar origName="Fotodeteccion__Lugar">
+            <C>
+ASC              <expl/>
+            </C>
+          </lugar>
+          <placa origName="Fotodeteccion__Placa">
+            <C>
+ASC            </C>
+          </placa>
+        </columns>
+      </tbl>
+    </Q4>
+    <LOGICAL_CONFIGEL>
+{"table2":"","fotodeteccions_by_placa":"","fotodeteccions_by_fecha1":"","fotodeteccions_by_fecha0":""}    </LOGICAL_CONFIGEL>
+  </LOGICAL_MODEL>
+</KDMPROJECT>
