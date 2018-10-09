@@ -5,7 +5,7 @@
 * Antes de empezar a trabajar asegurarse de tener el repositorio al día, sino hacer **git pull**
 * Para hacer un commit se hace lo siguiente
   1. **git add .**
-  2. **git commit -m <Mensaje que describa los cambios>**
+  2. **git commit -m __*Mensaje que describa los cambios*__ **
   3. **git push**
 
 ### Nombres para las páginas de consulta
