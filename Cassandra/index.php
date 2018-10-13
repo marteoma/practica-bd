@@ -48,7 +48,7 @@
 	<td></td>
 	<td>
 		<!-- Cantidad Infracciones -->
-		<form name="q5" action="">
+		<form name="q5" action="Q5.php">
 		<table>
 		  <tr><td>Placa:</td><td><input type="text" name="placa" value="AAA111"  maxlength="6"></td></tr>
 		  <tr><td colspan="2"><button class="button mi_color">Cantidad Infracciones</button></td></tr>
@@ -90,7 +90,7 @@
 	<td></td>
 	<td>
 		<!-- Cantidad Infracciones Por Zona-->
-		<form name="q6" action="">
+		<form name="q6" action="Q6.php">
 		<table>
 		   <tr><td>Lugar:</td><td><input type="text" name="lugar" value="1"  maxlength="1"></td></tr>
 		  <tr><td colspan="2"><button class="button mi_color">Cantidad Infracciones Por Zona</button></td></tr>
