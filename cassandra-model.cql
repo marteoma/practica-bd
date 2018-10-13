@@ -1,4 +1,4 @@
-CREATE KEYSPACE practica-bd WITH replication = {'class':'SimpleStrategy', 'replication_factor':1};
+CREATE KEYSPACE practica_bd WITH replication = {'class':'SimpleStrategy', 'replication_factor':1};
 USE practica-bd;
 
 // Q1:
