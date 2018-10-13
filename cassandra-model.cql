@@ -1,5 +1,5 @@
 CREATE KEYSPACE practica_bd WITH replication = {'class':'SimpleStrategy', 'replication_factor':1};
-USE practica-bd;
+USE practica_bd;
 
 // Q1:
 CREATE TABLE infracciones_in_rango (placa TEXT, velocidad INT, fecha TIMESTAMP, hora TIMESTAMP, lugar INT, PRIMARY KEY (placa,velocidad,fecha,hora)) WITH CLUSTERING ORDER BY (velocidad ASC, fecha ASC, hora ASC);
