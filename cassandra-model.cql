@@ -31,3 +31,9 @@ CREATE TABLE infracciones_by_lugar (lugar INT, infracciones COUNTER, PRIMARY KEY
 
 /* SELECT lugares_lugar, lugares_lugar FROM infracciones_by_lugar WHERE lugares_lugar=?; */
 
+BEGIN BATCH	
+  INSERT INTO datos_by_lugar (fecha, lugar, hora, placa, velocidad) VALUES(1539478798500, 0, 1539478798500, 'BBB444', 35); 
+  INSERT INTO infracciones_in_rango (placa, velocidad, fecha, hora, lugar) VALUES('BBB444', 35, 1539478798500, 1539478798500, 0);	
+  UPDATE pasos_by_mes SET pasos = pasos + 1 WHERE placa = 'BBB444' AND fecha = 1539478798500 AND lugar = 0; 
+  INSERT INTO infracciones_by_fecha (fecha, velocidad, hora, lugar, placa) VALUES(1539478798500, 35, 1539478798500, 0, 'BBB444'); 
+APPLY BATCH;

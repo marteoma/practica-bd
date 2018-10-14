@@ -5,14 +5,19 @@
 	Tecnicas avanzadas de base de datos - UDEM
 */
 
-	/*Usted debe cambiar esto segun su configuracion del proyecto (ubicacion dentro del wampp y el puerto del pache*/
+	/*Usted debe cambiar esto segun su configuracion del proyecto (ubicacion dentro del wampp y el puerto del apache*/
 	$URL_HOME = 'http://localhost/practica-bd/';
 
 	/*Se recuperan los argumentos*/
-	 $placa = htmlspecialchars($_GET["placa"]);
-	 $fedesde = htmlspecialchars($_GET["fedesde"]);
-	 $fehasta = htmlspecialchars($_GET["fehasta"]);
+	$placa = htmlspecialchars($_GET["placa"]);
+	$fedesde = htmlspecialchars($_GET["fedesde"]);
+	$fehasta = htmlspecialchars($_GET["fehasta"]);
 
+	$conn = new mysqli('localhost:3306', 'root', '', 'practica-bd');
+
+	if ($conn->connect_error) {
+    exit("Fallo al conectar a MySQL: " . $conn->connect_error);
+	} 
 
 /*Formato en HTML*/
 ?>
@@ -28,28 +33,24 @@
 <div>
 <table style="width:100%">
 <tr>
-	<th>#</th>
-    <th>Fecha</th>
-    <th>Hora</th>
-    <th>Lugar</th>
+	<th>Fecha y hora</th>
+	<th>Lugar</th>
 </tr>
 <?php
-$time_start = microtime(true); // Tiempo Inicial Proceso
+	$time_start = microtime(true); // Tiempo Inicial Proceso
 
-	/*Ciclo*/
-	for( $i= 1 ; $i <= 5 ; $i++ ) {	
-		/*Genera los valores de forma aleatoria*/
-		$lugar = rand ( 0 , 9 );
-		/*Se imprime la fila de la tabla*/
+	// $query = "SELECT fecha, lugar FROM fotodetecciones";
+	$rows = $conn -> query("SELECT fecha, lugares_lugar FROM fotodetecciones LIMIT 5");
+
+	foreach ($rows as $row) {	
 		?>
-		 <tr>
-		 	<td><?php echo "$i"; ?></td>
-		 	<td><?php echo "$fedesde"; ?></td>
-		 	<td>  1  </td>
-		 	<td><?php echo "$lugar"; ?></td>
-		 </tr>
-		 <?php
+		<tr>
+			<td><?php echo $row["fecha"]; ?></td>
+			<td><?php echo $row["lugares_lugar"]; ?></td>
+		</tr>
+		<?php
 	}
+
 ?>
 </table>
 </div>
@@ -57,6 +58,7 @@ $time_start = microtime(true); // Tiempo Inicial Proceso
 $time_end = microtime(true); // Tiempo Final
 $time = $time_end - $time_start; // Tiempo Consumido
 echo "\n</br></br><h2>Tiempo de ejecución ".$time." segundos</h2>";
+$conn -> close();
 ?>
 </body>
 </html>
