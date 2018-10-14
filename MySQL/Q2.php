@@ -9,10 +9,15 @@
 	$URL_HOME = 'http://localhost/practica-bd/';
 
 	/*Se recuperan los argumentos*/
-	 $año = htmlspecialchars($_GET["anio"]);
-	 $mes = htmlspecialchars($_GET["mes"]);
-	 $placa = htmlspecialchars($_GET["placa"]);
+	$año = htmlspecialchars($_GET["anio"]);
+	$mes = htmlspecialchars($_GET["mes"]);
+	$placa = htmlspecialchars($_GET["placa"]);
 
+	$conn = new mysqli('localhost:3306', 'root', '', 'practica-bd');
+
+	if ($conn->connect_error) {
+		exit("Fallo al conectar a MySQL: " . $conn->connect_error);
+	} 
 
 /*Formato en HTML*/
 ?>
@@ -28,26 +33,24 @@
 <div>
 <table style="width:100%">
 <tr>
-	<th>#</th>
     <th>Lugar</th>
     <th>Numero de pasadas</th>
 </tr>
 <?php
-$time_start = microtime(true); // Tiempo Inicial Proceso
+	$time_start = microtime(true); // Tiempo Inicial Proceso
+	$nmes = $mes + 1;
+	$rows = $conn -> query("SELECT lugares_lugar, COUNT(*) pasadas FROM fotodetecciones
+		WHERE fecha >= '${año}/${mes}/01' AND fecha < '${año}/${nmes}/01'
+		AND vehiculos_placa = '${placa}'
+		GROUP BY lugares_lugar");
 
-	/*Ciclo*/
-	for( $i= 1 ; $i <= 5 ; $i++ ) {	
-		/*Genera los valores de forma aleatoria*/
-		$lugar = rand ( 0 , 9 );
-		$pasadas = rand ( 0 , 150 );
-		/*Se imprime la fila de la tabla*/
-		?>
-		 <tr>
-		 	<td><?php echo "$i"; ?></td>
-		 	<td><?php echo "$lugar"; ?></td>
-		 	<td><?php echo "$pasadas"; ?></td>
-		 </tr>
-		 <?php
+	foreach ($rows as $row) {	
+	?>
+		<tr>
+		<td><?php echo $row["lugares_lugar"]; ?></td>
+		<td><?php echo $row["pasadas"]; ?></td>
+		</tr>
+	<?php
 	}
 ?>
 </table>

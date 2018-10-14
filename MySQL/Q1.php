@@ -39,8 +39,9 @@
 <?php
 	$time_start = microtime(true); // Tiempo Inicial Proceso
 
-	// $query = "SELECT fecha, lugar FROM fotodetecciones";
-	$rows = $conn -> query("SELECT fecha, lugares_lugar FROM fotodetecciones LIMIT 5");
+	$rows = $conn -> query("SELECT fecha, lugares_lugar FROM fotodetecciones
+													WHERE fecha > '${fedesde}' AND fecha < '${fehasta}' AND velocidad > 80
+													AND vehiculos_placa = '${placa}'");
 
 	foreach ($rows as $row) {	
 		?>
@@ -50,7 +51,6 @@
 		</tr>
 		<?php
 	}
-
 ?>
 </table>
 </div>
