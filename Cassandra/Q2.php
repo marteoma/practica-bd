@@ -12,8 +12,17 @@
 	 $año = htmlspecialchars($_GET["anio"]);
 	 $mes = htmlspecialchars($_GET["mes"]);
 	 $placa = htmlspecialchars($_GET["placa"]);
-
-
+	 $cluster   = Cassandra::cluster()
+               ->withContactPoints('127.0.0.1')
+               ->build();
+	 $session   = $cluster->connect("practica_bd");	
+	 $mess = $mes + 1;
+	 $fecha = $año.'-'.$mes;
+	 $fechalim = $año.'-'.$mess;
+	 $timestamp = strtotime($fecha)*1000;
+	 $timestampf = strtotime($fechalim)*1000;
+	
+	 
 /*Formato en HTML*/
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -28,24 +37,26 @@
 <div>
 <table style="width:100%">
 <tr>
-	<th>#</th>
+	
     <th>Lugar</th>
     <th>Numero de pasadas</th>
 </tr>
 <?php
 $time_start = microtime(true); // Tiempo Inicial Proceso
+$rows = "SELECT lugar, pasos 
+		 FROM pasos_by_mes 
+		 where    placa = '${placa}' and fecha > '${timestamp}' and fecha < '${timestampf}'
+		 ALLOW FILTERING;";
 
+$statement = new Cassandra\SimpleStatement($rows);
+$result    = $session->execute($statement);
 	/*Ciclo*/
-	for( $i= 1 ; $i <= 5 ; $i++ ) {	
-		/*Genera los valores de forma aleatoria*/
-		$lugar = rand ( 0 , 9 );
-		$pasadas = rand ( 0 , 150 );
-		/*Se imprime la fila de la tabla*/
+	foreach($result as $row){		
 		?>
 		 <tr>
-		 	<td><?php echo "$i"; ?></td>
-		 	<td><?php echo "$lugar"; ?></td>
-		 	<td><?php echo "$pasadas"; ?></td>
+		
+			<td><?php echo $row['lugar'];?></td>
+			<td><?php echo $row['pasos'];?></td>
 		 </tr>
 		 <?php
 	}
