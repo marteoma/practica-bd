@@ -6,7 +6,7 @@
 */
 
 	/*Usted debe cambiar esto segun su configuracion del proyecto (ubicacion dentro del wampp y el puerto del pache*/
-	$URL_HOME = 'http://localhost/practica-bd/';
+	$URL_HOME = 'http://localhost:9090/practica-bd/';
 
 	/*Se recuperan los argumentos*/
 	$fecha = htmlspecialchars($_GET["fecha"]);

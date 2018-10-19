@@ -10,9 +10,11 @@
 
 	/*Se recuperan los argumentos*/
 	 $lugar = htmlspecialchars($_GET["lugar"]);
+	 $conn = new mysqli('localhost:3306', 'root', '', 'practica-bd');
 
-
+	 
 /*Formato en HTML*/
+
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -26,26 +28,34 @@
 <div>
 <table style="width:100%">
 <tr>
-	<th>#</th>
+	
 	<th>Lugar</th>
     <th>Cantidad de infracciones</th>
 </tr>
 <?php
-$time_start = microtime(true); // Tiempo Inicial Proceso
-
-	/*Ciclo*/
-	for( $i= 1 ; $i <= 1 ; $i++ ) {	
-		/*Genera los valores de forma aleatoria*/
-		$infracciones = rand ( 0 , 150 );
-		/*Se imprime la fila de la tabla*/
-		?>
-		 <tr>
-		 	<td><?php echo "$i"; ?></td>
-		 	<td><?php echo "$lugar"; ?></td>
-		 	<td><?php echo "$infracciones"; ?></td>
-		 </tr>
-		 <?php
+		$time_start = microtime(true); // Tiempo Inicial Proceso
+		
+		$rows = $conn ->query("SELECT lugares_lugar lugar, count(lugares_lugar) cantidad
+							FROM fotodetecciones
+							WHERE lugares_lugar = '${lugar}'
+							GROUP BY lugar;");
+	
+	/*	
+	$rows = $conn -> query("SELECT TIME(fecha) hora, vehiculos_placa placa, velocidad
+	FROM fotodetecciones");
+*/
+echo $conn -> error;	
+if (is_array($rows) || is_object($rows))
+{
+	foreach ($rows as $row) {	
+	?>
+		<tr>
+		<td><?php echo $row["lugar"]; ?></td>
+		<td><?php echo $row["cantidad"]; ?></td>
+		</tr>
+	<?php
 	}
+}
 ?>
 </table>
 </div>

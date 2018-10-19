@@ -10,6 +10,7 @@
 
 	/*Se recuperan los argumentos*/
 	 $placa = htmlspecialchars($_GET["placa"]);
+	 $conn = new mysqli('localhost:3306', 'root', '', 'practica-bd');
 
 
 /*Formato en HTML*/
@@ -26,26 +27,30 @@
 <div>
 <table style="width:100%">
 <tr>
-	<th>#</th>
+	
 	<th>Placa</th>
     <th>Cantidad de infracciones</th>
 </tr>
 <?php
 $time_start = microtime(true); // Tiempo Inicial Proceso
 
-	/*Ciclo*/
-	for( $i= 1 ; $i <= 1 ; $i++ ) {	
-		/*Genera los valores de forma aleatoria*/
-		$infracciones = rand ( 0 , 150 );
-		/*Se imprime la fila de la tabla*/
-		?>
-		 <tr>
-		 	<td><?php echo "$i"; ?></td>
-		 	<td><?php echo "$placa"; ?></td>
-		 	<td><?php echo "$infracciones"; ?></td>
-		 </tr>
-		 <?php
-	}
+$rows = $conn ->query("SELECT vehiculos_placa placa, count(*) cantidad
+					   FROM fotodetecciones
+					   WHERE vehiculos_placa = '${placa}'
+					   GROUP BY placa;");
+
+echo $conn -> error;
+
+foreach($rows as $row){
+	?>
+		<tr>
+		
+		<td><?php echo $row["placa"]; ?></td>
+		<td><?php echo $row["cantidad"]; ?></td>
+		</tr>
+	<?php
+}
+
 ?>
 </table>
 </div>

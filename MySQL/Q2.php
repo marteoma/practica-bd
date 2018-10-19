@@ -1,12 +1,12 @@
 <?php
 /*
-	Creado por Juan Jose y Mateo
+	Creado por Juan Jose , Mateo y mcMEJIA 
 	Version 1.0 - 2018/10/06
 	Tecnicas avanzadas de base de datos - UDEM
 */
 
-	/*Usted debe cambiar esto segun su configuracion del proyecto (ubicacion dentro del wampp y el puerto del pache*/
-	$URL_HOME = 'http://localhost/practica-bd/';
+	/*Usted debe cambiar esto segun su configuracion del proyecto (ubicacion dentro del wampp y el puerto del apache*/
+	$URL_HOME = 'http://localhost:9090/practica-bd/';
 
 	/*Se recuperan los argumentos*/
 	$año = htmlspecialchars($_GET["anio"]);

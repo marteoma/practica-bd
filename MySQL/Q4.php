@@ -10,6 +10,7 @@
 
 	/*Se recuperan los argumentos*/
 	 $fecha = htmlspecialchars($_GET["fecha"]);
+	 $conn = new mysqli('localhost:3306', 'root', '', 'practica-bd');
 
 
 /*Formato en HTML*/
@@ -26,7 +27,7 @@
 <div>
 <table style="width:100%">
 <tr>
-	<th>#</th>
+
     <th>Hora</th>
     <th>Lugar</th>
     <th>Placa</th>
@@ -34,20 +35,21 @@
 <?php
 $time_start = microtime(true); // Tiempo Inicial Proceso
 
-	/*Ciclo*/
-	for( $i= 1 ; $i <= 5 ; $i++ ) {	
-		/*Genera los valores de forma aleatoria*/
-		$lugar = rand ( 0 , 9 );
-		/*Se imprime la fila de la tabla*/
+		$rows = $conn -> query("SELECT TIME(fecha) hora, lugares_lugar lugar, vehiculos_placa placa
+		FROM fotodetecciones
+		WHERE DATE(fecha) = '${fecha}' AND velocidad > 80");
+
+		
+		foreach ($rows as $row) {	
 		?>
 		 <tr>
-		 	<td><?php echo "$i"; ?></td>
-		 	<td>  12:42  </td>
-		 	<td><?php echo "$lugar"; ?></td>
-		 	<td> CCC111 </td>
+				<td><?php echo $row["hora"]; ?></td>
+				<td><?php echo $row["lugar"]; ?></td>
+				<td><?php echo $row["placa"]; ?></td>
 		 </tr>
 		 <?php
 	}
+			
 ?>
 </table>
 </div>

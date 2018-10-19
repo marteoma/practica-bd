@@ -10,9 +10,14 @@
 
 	/*Se recuperan los argumentos*/
 	 $placa = htmlspecialchars($_GET["placa"]);
-	 $fedesde = htmlspecialchars($_GET["fedesde"]);
-	 $fehasta = htmlspecialchars($_GET["fehasta"]);
-
+	 $fedesde = strtotime(htmlspecialchars($_GET["fedesde"]))*1000;
+	 $fehasta = strtotime(htmlspecialchars($_GET["fehasta"]))*1000;
+	
+	 $cluster   = Cassandra::cluster()
+               ->withContactPoints('127.0.0.1')
+               ->build();
+     $session   = $cluster->connect("practica_bd");
+	 echo $fedesde;
 
 /*Formato en HTML*/
 ?>
@@ -27,8 +32,7 @@
 <td><H3>Placa: <?php echo "$placa"; ?></H3></td><td><H3>Fecha desde: <?php echo "$fedesde"; ?></H3></td><td><H3>Fecha hasta: <?php echo "$fehasta"; ?></H3></td>
 <div>
 <table style="width:100%">
-<tr>
-	<th>#</th>
+	
     <th>Fecha</th>
     <th>Hora</th>
     <th>Lugar</th>
@@ -36,20 +40,31 @@
 <?php
 $time_start = microtime(true); // Tiempo Inicial Proceso
 
-	/*Ciclo*/
-	for( $i= 1 ; $i <= 5 ; $i++ ) {	
-		/*Genera los valores de forma aleatoria*/
-		$lugar = rand ( 0 , 9 );
-		/*Se imprime la fila de la tabla*/
+
+echo $fedesde;
+
+$rows = "SELECT fecha, lugar 
+		 FROM infracciones_in_rango 
+		 where velocidad >= 80 and   placa = '${placa}' and fecha >= '${fedesde}' and fecha <= '${fehasta}'
+		 ALLOW FILTERING;";
+echo $rows;
+$statement = new Cassandra\SimpleStatement($rows);
+$result    = $session->execute($statement);
+
+/*Ciclo*/
+
+	foreach($result as $row){
+		$fecha = $row['fecha'];
+		
 		?>
 		 <tr>
-		 	<td><?php echo "$i"; ?></td>
-		 	<td><?php echo "$fedesde"; ?></td>
-		 	<td>  1  </td>
-		 	<td><?php echo "$lugar"; ?></td>
+		 	<td><?php echo var_dump($fecha), date('Y/m/d',$fecha->seconds); ?></td>
+		 	<td><?php echo date('H:i:s',$row['fecha']->seconds);?></td>
+			<td><?php echo $row['lugar'];?></td>
 		 </tr>
 		 <?php
 	}
+	
 ?>
 </table>
 </div>
