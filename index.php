@@ -24,7 +24,7 @@
 	<form action="masivo_insertar.php">
 		<fieldset id="bd">
 			<input type="radio" name="bd" value="Cassandra" checked > Cassandra </input>
-			<input type="radio" name="bd" value="MongoDB"> MongoDB</input>
+			<input type="radio" name="bd" value="Mongo"> MongoDB</input>
 			<input type="radio" name="bd" value="MySQL"> MySQL o MariaDB</input>
 		</fieldset> 
 		Cantidad de registros:<br />

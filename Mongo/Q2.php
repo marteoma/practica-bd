@@ -9,10 +9,11 @@
 	$URL_HOME = 'http://localhost/practica-bd/';
 
 	/*Se recuperan los argumentos*/
-	 $año = htmlspecialchars($_GET["anio"]);
-	 $mes = htmlspecialchars($_GET["mes"]);
-	 $placa = htmlspecialchars($_GET["placa"]);
+	$año = htmlspecialchars($_GET["anio"]);
+	$mes = htmlspecialchars($_GET["mes"]);
+	$placa = htmlspecialchars($_GET["placa"]);
 
+	$mongo = new MongoDB\Driver\Manager("mongodb://localhost:27017");
 
 /*Formato en HTML*/
 ?>
@@ -35,20 +36,28 @@
 <?php
 $time_start = microtime(true); // Tiempo Inicial Proceso
 
-	/*Ciclo*/
-	for( $i= 1 ; $i <= 5 ; $i++ ) {	
-		/*Genera los valores de forma aleatoria*/
-		$lugar = rand ( 0 , 9 );
-		$pasadas = rand ( 0 , 150 );
-		/*Se imprime la fila de la tabla*/
+	$nextm = $mes + 1;
+
+	$query = new MongoDB\Driver\Query([
+		'placa' => $placa, 
+		'fecha' => [
+			'$gte' => strtotime("{$año}/${mes}/01").'',
+			'$lt' => strtotime("{$año}/${nextm}/01").'',
+		]
+	]);
+
+	$rows = $mongo -> executeQuery('practica_bd.fotodetecciones', $query);
+
+	foreach($rows as $row) {
 		?>
-		 <tr>
-		 	<td><?php echo "$i"; ?></td>
-		 	<td><?php echo "$lugar"; ?></td>
-		 	<td><?php echo "$pasadas"; ?></td>
-		 </tr>
-		 <?php
-	}
+		<tr>
+			<td><?php echo date('Y-m-d', $row -> fecha); ?></td>
+			<td><?php echo date('H:i:s', $row -> fecha); ?></td>
+			<td><?php echo $row -> lugar; ?></td>
+		</tr>
+		<?php
+	}	
+
 ?>
 </table>
 </div>

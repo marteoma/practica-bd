@@ -13,6 +13,8 @@
 	 $fedesde = htmlspecialchars($_GET["fedesde"]);
 	 $fehasta = htmlspecialchars($_GET["fehasta"]);
 
+	 $mongo = new MongoDB\Driver\Manager("mongodb://localhost:27017");
+
 
 /*Formato en HTML*/
 ?>
@@ -28,28 +30,36 @@
 <div>
 <table style="width:100%">
 <tr>
-	<th>#</th>
-    <th>Fecha</th>
-    <th>Hora</th>
-    <th>Lugar</th>
+	<th>Fecha</th>
+	<th>Hora</th>
+	<th>Lugar</th>
 </tr>
 <?php
 $time_start = microtime(true); // Tiempo Inicial Proceso
 
-	/*Ciclo*/
-	for( $i= 1 ; $i <= 5 ; $i++ ) {	
-		/*Genera los valores de forma aleatoria*/
-		$lugar = rand ( 0 , 9 );
-		/*Se imprime la fila de la tabla*/
+	$query = new MongoDB\Driver\Query([
+		'placa' => $placa, 
+		'fecha' => [
+			'$gt' => strtotime($fedesde).'',
+			'$lt' => strtotime($fehasta).'',
+		],
+		'velocidad' => [
+			'$gt' => '80'
+		]
+	]);
+
+	$rows = $mongo -> executeQuery('practica_bd.fotodetecciones', $query);
+	
+	foreach($rows as $row) {
 		?>
-		 <tr>
-		 	<td><?php echo "$i"; ?></td>
-		 	<td><?php echo "$fedesde"; ?></td>
-		 	<td>  1  </td>
-		 	<td><?php echo "$lugar"; ?></td>
-		 </tr>
-		 <?php
+		<tr>
+			<td><?php echo date('Y-m-d', $row -> fecha); ?></td>
+			<td><?php echo date('H:i:s', $row -> fecha); ?></td>
+			<td><?php echo $row -> lugar; ?></td>
+		</tr>
+		<?php
 	}
+
 ?>
 </table>
 </div>

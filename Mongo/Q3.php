@@ -9,9 +9,10 @@
 	$URL_HOME = 'http://localhost/practica-bd/';
 
 	/*Se recuperan los argumentos*/
-	 $fecha = htmlspecialchars($_GET["fecha"]);
-	 $lugar = htmlspecialchars($_GET["lugar"]);
+	$fecha = htmlspecialchars($_GET["fecha"]);
+	$lugar = htmlspecialchars($_GET["lugar"]);
 
+	$mongo = new MongoDB\Driver\Manager("mongodb://localhost:27017");
 
 /*Formato en HTML*/
 ?>
@@ -27,28 +28,34 @@
 <div>
 <table style="width:100%">
 <tr>
-	<th>#</th>
-    <th>Hora</th>
-    <th>Placa</th>
-    <th>Velocidad</th>
+	<th>Hora</th>
+	<th>Placa</th>
+	<th>Velocidad</th>
 </tr>
 <?php
-$time_start = microtime(true); // Tiempo Inicial Proceso
+	$time_start = microtime(true); // Tiempo Inicial Proceso
 
-	/*Ciclo*/
-	for( $i= 1 ; $i <= 5 ; $i++ ) {	
-		/*Genera los valores de forma aleatoria*/
-		$velocidad = rand ( 10 , 100 );
-		/*Se imprime la fila de la tabla*/
+
+	$query = new MongoDB\Driver\Query([
+		'lugar' => $lugar, 
+		'fecha' => [
+			'$gte' => strtotime($fecha).'',
+			'$lt' => (strtotime($fecha)+86400).'',
+		]
+	]);
+
+	$rows = $mongo -> executeQuery('practica_bd.fotodetecciones', $query);
+
+	foreach($rows as $row) {
 		?>
-		 <tr>
-		 	<td><?php echo "$i"; ?></td>
-		 	<td>  10:35  </td>
-		 	<td> BBB222</td>
-		 	<td><?php echo "$velocidad"; ?></td>
-		 </tr>
-		 <?php
+		<tr>			
+			<td><?php echo date('H:i:s', $row -> fecha); ?></td>
+			<td><?php echo $row -> placa; ?></td>
+			<td><?php echo $row -> velocidad; ?></td>
+		</tr>
+		<?php
 	}
+
 ?>
 </table>
 </div>
