@@ -10,6 +10,10 @@
 
 	/*Se recuperan los argumentos*/
 	 $lugar = htmlspecialchars($_GET["lugar"]);
+	 $cluster   = Cassandra::cluster()
+               ->withContactPoints('127.0.0.1')
+               ->build();
+	 $session   = $cluster->connect("practica_bd");	
 
 
 /*Formato en HTML*/
@@ -26,23 +30,26 @@
 <div>
 <table style="width:100%">
 <tr>
-	<th>#</th>
+
 	<th>Lugar</th>
     <th>Cantidad de infracciones</th>
 </tr>
 <?php
 $time_start = microtime(true); // Tiempo Inicial Proceso
+$rows = "SELECT lugar, infracciones 
+		 FROM infracciones_by_lugar 
+		 where    lugar = ${lugar};";
 
+$statement = new Cassandra\SimpleStatement($rows);
+$result    = $session->execute($statement);
 	/*Ciclo*/
-	for( $i= 1 ; $i <= 1 ; $i++ ) {	
-		/*Genera los valores de forma aleatoria*/
-		$infracciones = rand ( 0 , 150 );
+	foreach($result as $row) {	
 		/*Se imprime la fila de la tabla*/
 		?>
 		 <tr>
-		 	<td><?php echo "$i"; ?></td>
-		 	<td><?php echo "$lugar"; ?></td>
-		 	<td><?php echo "$infracciones"; ?></td>
+		 	
+		 	<td><?php echo $row['lugar']; ?></td>
+		 	<td><?php echo $row['infracciones']; ?></td>
 		 </tr>
 		 <?php
 	}

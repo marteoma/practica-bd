@@ -10,6 +10,13 @@
 
 	/*Se recuperan los argumentos*/
 	 $fecha = htmlspecialchars($_GET["fecha"]);
+	 $feconsulta  = strtotime($fecha)*1000;
+	 $f = strtotime($fecha)+ 24*60*60;
+	 $felimite = $f *1000;
+	 $cluster   = Cassandra::cluster()
+	 			->withContactPoints('127.0.0.1')
+		 		->build();
+	 $session   = $cluster->connect("practica_bd");	
 
 
 /*Formato en HTML*/
@@ -26,25 +33,30 @@
 <div>
 <table style="width:100%">
 <tr>
-	<th>#</th>
+	
     <th>Hora</th>
     <th>Lugar</th>
     <th>Placa</th>
 </tr>
 <?php
 $time_start = microtime(true); // Tiempo Inicial Proceso
-
+$rows = "SELECT fecha,lugar, placa 
+		 FROM infracciones_by_fecha
+		 where  fecha > '${feconsulta}' and fecha < '${felimite}'
+		 ALLOW FILTERING;";
+$statement = new Cassandra\SimpleStatement($rows);
+$result    = $session->execute($statement);
 	/*Ciclo*/
-	for( $i= 1 ; $i <= 5 ; $i++ ) {	
-		/*Genera los valores de forma aleatoria*/
-		$lugar = rand ( 0 , 9 );
+	foreach($result as $row) {	
 		/*Se imprime la fila de la tabla*/
+		$fecha = $row['fecha'];
+		$fechaftimestamp = date($fecha);
+		$h = date('H:i:s',$fechaftimestamp/1000);
 		?>
 		 <tr>
-		 	<td><?php echo "$i"; ?></td>
-		 	<td>  12:42  </td>
-		 	<td><?php echo "$lugar"; ?></td>
-		 	<td> CCC111 </td>
+		 	<td><?php echo $h; ?></td>
+		 	<td><?php echo $row['lugar']; ?></td>
+		 	<td><?php echo $row['placa'];?></td>
 		 </tr>
 		 <?php
 	}

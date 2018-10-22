@@ -11,7 +11,6 @@
 	/*Se recuperan los argumentos*/
 	$fecha = htmlspecialchars($_GET["fecha"]);
 	$lugar = htmlspecialchars($_GET["lugar"]);
-
 	$conn = new mysqli('localhost:3306', 'root', '', 'practica-bd');
 
 	if ($conn->connect_error) {
@@ -41,10 +40,10 @@
 
 	$rows = $conn -> query("SELECT TIME(fecha) hora, vehiculos_placa placa, velocidad
 		FROM fotodetecciones
-		WHERE DATE(fecha) = '${fecha}' AND lugares_lugar = ${lugar}");
+		WHERE DATE(fecha) > ${fecha} AND DATE(fecha) < '${fecha}'+ INTERVAL 1 DAY AND lugares_lugar = ${lugar}");
 
 	echo $conn -> error;	
-
+	
 	foreach ($rows as $row) {	
 	?>
 		<tr>
