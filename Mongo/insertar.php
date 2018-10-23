@@ -13,20 +13,12 @@ $placa		= htmlspecialchars($_GET["placa"]);
 $tiempo		= htmlspecialchars($_GET["tiempo"]);
 $velocidad	= htmlspecialchars($_GET["velocidad"]);
 
-/*Validación de argumentos*/
-/*
-echo 'lugar='. 		$lugar .'</br>';
-echo 'placa='. 		$placa .'</br>';
-echo 'tiempo='. 	$tiempo .'</br>';
-echo 'velocidad='. 	$velocidad;'</br>';
-*/
-
 /* ==--> Aqui ustede debe hacer la conexion a la base de datos*/
 
 $manager = new MongoDB\Driver\Manager("mongodb://localhost:27017");
 
 // datos_by_lugar
-$documento = ['fecha' => $tiempo, 'lugar' => $lugar, 'placa' => $placa, 'velocidad' => $velocidad];
+$documento = ['fecha' => intval($tiempo), 'lugar' => $lugar, 'placa' => $placa, 'velocidad' => intval($velocidad)];
 
 /* ==--> insertar el o los registros*/
 

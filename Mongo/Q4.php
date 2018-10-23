@@ -7,6 +7,7 @@
 
 	/*Usted debe cambiar esto segun su configuracion del proyecto (ubicacion dentro del wampp y el puerto del pache*/
 	$URL_HOME = 'http://localhost/practica-bd/';
+	date_default_timezone_set('America/Bogota');
 
 	/*Se recuperan los argumentos*/
 	$fecha = htmlspecialchars($_GET["fecha"]);
@@ -34,14 +35,15 @@
 </tr>
 <?php
 	$time_start = microtime(true); // Tiempo Inicial Proceso
-
+	
+	/* Revisado y funcionando */
 	$query = new MongoDB\Driver\Query([
 		'fecha' => [
-			'$gte' => strtotime($fecha).'',
-			'$lt' => (strtotime($fecha)+86400).'',
+			'$gte' => strtotime($fecha),
+			'$lt' => (strtotime($fecha)+86400),
 		],
 		'velocidad' => [
-			'$gt' => '80'
+			'$gt' => 80
 		]
 	]);
 

@@ -7,6 +7,8 @@
 
 	/*Usted debe cambiar esto segun su configuracion del proyecto (ubicacion dentro del wampp y el puerto del pache*/
 	$URL_HOME = 'http://localhost/practica-bd/';
+	date_default_timezone_set('America/Bogota');
+
 
 	/*Se recuperan los argumentos*/
 	 $placa = htmlspecialchars($_GET["placa"]);
@@ -35,16 +37,17 @@
 	<th>Lugar</th>
 </tr>
 <?php
-$time_start = microtime(true); // Tiempo Inicial Proceso
-
+	$time_start = microtime(true); // Tiempo Inicial Proceso
+	
+	/* Consulta revisada y funcionando */
 	$query = new MongoDB\Driver\Query([
 		'placa' => $placa, 
 		'fecha' => [
-			'$gt' => strtotime($fedesde).'',
-			'$lt' => strtotime($fehasta).'',
+			'$gt' => strtotime($fedesde),
+			'$lt' => strtotime($fehasta),
 		],
 		'velocidad' => [
-			'$gt' => '80'
+			'$gt' => 80
 		]
 	]);
 

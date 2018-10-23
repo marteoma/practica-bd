@@ -7,6 +7,7 @@
 
 	/*Usted debe cambiar esto segun su configuracion del proyecto (ubicacion dentro del wampp y el puerto del pache*/
 	$URL_HOME = 'http://localhost/practica-bd/';
+	date_default_timezone_set('America/Bogota');
 
 	/*Se recuperan los argumentos*/
 	$año = htmlspecialchars($_GET["anio"]);
@@ -29,34 +30,47 @@
 <div>
 <table style="width:100%">
 <tr>
-	<th>#</th>
-    <th>Lugar</th>
-    <th>Numero de pasadas</th>
+  <th>Lugar</th>
+  <th>Numero de pasadas</th>
 </tr>
 <?php
 $time_start = microtime(true); // Tiempo Inicial Proceso
 
+	/* Revisada y funcionando */
 	$nextm = $mes + 1;
 
-	$query = new MongoDB\Driver\Query([
-		'placa' => $placa, 
-		'fecha' => [
-			'$gte' => strtotime("{$año}/${mes}/01").'',
-			'$lt' => strtotime("{$año}/${nextm}/01").'',
-		]
+	$command = new MongoDB\Driver\Command([
+		'aggregate' => 'fotodetecciones',
+		'pipeline' => [
+			[
+				'$match' => [
+					'placa' => $placa, 
+					'fecha' => [
+						'$gte' => strtotime("{$año}/${mes}/01"),
+						'$lt' => strtotime("{$año}/${nextm}/01"),
+					]
+				]
+			],
+			[
+				'$group' => [
+					'_id' => '$lugar', 
+					'pasos' => ['$sum' => 1]
+				]
+			]
+		],
+		'cursor' => new stdClass,
 	]);
+	
+	$cursor = $mongo->executeCommand('practica_bd', $command);
 
-	$rows = $mongo -> executeQuery('practica_bd.fotodetecciones', $query);
-
-	foreach($rows as $row) {
+	foreach($cursor as $row) {
 		?>
 		<tr>
-			<td><?php echo date('Y-m-d', $row -> fecha); ?></td>
-			<td><?php echo date('H:i:s', $row -> fecha); ?></td>
-			<td><?php echo $row -> lugar; ?></td>
+			<td><?php echo $row -> _id; ?></td>
+			<td><?php echo $row -> pasos; ?></td>
 		</tr>
 		<?php
-	}	
+	}
 
 ?>
 </table>

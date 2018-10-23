@@ -6,6 +6,7 @@
 	
 	Nota: En Archivo donde no hay que contabilizar los tiempos
 */
+date_default_timezone_set('America/Bogota');
 
 /*Se recuperan los argumentos*/
 $lugar		= htmlspecialchars($_GET["lugar"]);

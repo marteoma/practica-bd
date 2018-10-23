@@ -7,10 +7,12 @@
 
 	/*Usted debe cambiar esto segun su configuracion del proyecto (ubicacion dentro del wampp y el puerto del pache*/
 	$URL_HOME = 'http://localhost/practica-bd/';
+	date_default_timezone_set('America/Bogota');
 
 	/*Se recuperan los argumentos*/
 	 $placa = htmlspecialchars($_GET["placa"]);
 
+	 $mongo = new MongoDB\Driver\Manager("mongodb://localhost:27017");
 
 /*Formato en HTML*/
 ?>
@@ -26,26 +28,44 @@
 <div>
 <table style="width:100%">
 <tr>
-	<th>#</th>
 	<th>Placa</th>
     <th>Cantidad de infracciones</th>
 </tr>
 <?php
-$time_start = microtime(true); // Tiempo Inicial Proceso
+	$time_start = microtime(true); // Tiempo Inicial Proceso
 
-	/*Ciclo*/
-	for( $i= 1 ; $i <= 1 ; $i++ ) {	
-		/*Genera los valores de forma aleatoria*/
-		$infracciones = rand ( 0 , 150 );
-		/*Se imprime la fila de la tabla*/
+	/* Revisada y funcionando */
+	$command = new MongoDB\Driver\Command([
+		'aggregate' => 'fotodetecciones',
+		'pipeline' => [
+			[
+				'$match' => [
+					'placa' => $placa,
+					'velocidad' => [
+						'$gt' => 80
+					]
+				]
+			],
+			[
+				'$group' => [
+					'_id' => '$placa', 
+					'total' => ['$sum' => 1]
+				]
+			]
+		],
+		'cursor' => new stdClass,
+	]);
+
+	$cursor = $mongo->executeCommand('practica_bd', $command);
+
+	foreach($cursor as $row) {
 		?>
-		 <tr>
-		 	<td><?php echo "$i"; ?></td>
-		 	<td><?php echo "$placa"; ?></td>
-		 	<td><?php echo "$infracciones"; ?></td>
-		 </tr>
-		 <?php
-	}
+		<tr>
+			<td><?php echo $row -> _id; ?></td>
+			<td><?php echo $row -> total; ?></td>
+		</tr>
+		<?php
+}
 ?>
 </table>
 </div>

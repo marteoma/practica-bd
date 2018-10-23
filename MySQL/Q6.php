@@ -7,6 +7,7 @@
 
 	/*Usted debe cambiar esto segun su configuracion del proyecto (ubicacion dentro del wampp y el puerto del pache*/
 	$URL_HOME = 'http://localhost/practica-bd/';
+	date_default_timezone_set('America/Bogota');
 
 	/*Se recuperan los argumentos*/
 	 $lugar = htmlspecialchars($_GET["lugar"]);
@@ -37,7 +38,7 @@
 		
 		$rows = $conn ->query("SELECT lugares_lugar lugar, count(lugares_lugar) cantidad
 							FROM fotodetecciones
-							WHERE lugares_lugar = '${lugar}'
+							WHERE lugares_lugar = '${lugar}' AND velocidad > 80
 							GROUP BY lugar;");
 	
 	/*	

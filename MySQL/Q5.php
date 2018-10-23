@@ -7,6 +7,7 @@
 
 	/*Usted debe cambiar esto segun su configuracion del proyecto (ubicacion dentro del wampp y el puerto del pache*/
 	$URL_HOME = 'http://localhost/practica-bd/';
+	date_default_timezone_set('America/Bogota');
 
 	/*Se recuperan los argumentos*/
 	 $placa = htmlspecialchars($_GET["placa"]);
@@ -36,7 +37,7 @@ $time_start = microtime(true); // Tiempo Inicial Proceso
 
 $rows = $conn ->query("SELECT vehiculos_placa placa, count(*) cantidad
 					   FROM fotodetecciones
-					   WHERE vehiculos_placa = '${placa}'
+					   WHERE vehiculos_placa = '${placa}' AND velocidad > 80
 					   GROUP BY placa;");
 
 echo $conn -> error;
