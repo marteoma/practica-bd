@@ -34,13 +34,14 @@
 <div>
 <table style="width:100%">
 <tr>
-	<th>Fecha y hora</th>
+	<th>Fecha</th>
+	<th>hora</th>
 	<th>Lugar</th>
 </tr>
 <?php
 	$time_start = microtime(true); // Tiempo Inicial Proceso
 
-	$rows = $conn -> query("SELECT fecha, lugares_lugar FROM fotodetecciones
+	$rows = $conn -> query("SELECT DATE_FORMAT(fecha, '%y/%m/%d') fecha, DATE_FORMAT(fecha, '%H:%i:%s') hora, lugares_lugar FROM fotodetecciones
 													WHERE fecha > '${fedesde}' AND fecha < '${fehasta}' AND velocidad > 80
 													AND vehiculos_placa = '${placa}'");
 
@@ -48,6 +49,7 @@
 		?>
 		<tr>
 			<td><?php echo $row["fecha"]; ?></td>
+			<td><?php echo $row["hora"]; ?></td>
 			<td><?php echo $row["lugares_lugar"]; ?></td>
 		</tr>
 		<?php
