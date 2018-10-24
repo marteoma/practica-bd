@@ -11,8 +11,7 @@ date_default_timezone_set('America/Bogota');
 /*Se recuperan los argumentos*/
 $lugar		= htmlspecialchars($_GET["lugar"]);
 $placa		= htmlspecialchars($_GET["placa"]);
-$tiempo		= htmlspecialchars($_GET["tiempo"]) * 1000;
-$i  		= htmlspecialchars($_GET["id"]);
+$tiempo		= htmlspecialchars($_GET["tiempo"])*1000;
 $velocidad	= htmlspecialchars($_GET["velocidad"]);
 echo $tiempo;
 //$registros = htmlspecialchars($_GET["registros"]);
@@ -35,14 +34,12 @@ $batch = new Cassandra\BatchStatement(Cassandra::BATCH_UNLOGGED);
 $batch -> add(
 	"INSERT INTO datos_by_lugar (fecha, lugar,placa, velocidad) VALUES(${tiempo}, ${lugar}, '${placa}', ${velocidad})"
 );
-$batch -> add(
-	"INSERT INTO infracciones_in_rango (placa ,id ,velocidad, fecha, lugar) VALUES('${placa}',${i} , ${velocidad}, ${tiempo}, ${lugar})"
-);
+
 $batchCounter -> add(
 	"UPDATE pasos_by_mes SET pasos = pasos + 1 WHERE placa = '${placa}' AND fecha = ${tiempo} AND lugar = ${lugar}"
 );
 $batch -> add(
-	"INSERT INTO infracciones_by_fecha (fecha ,id ,velocidad, lugar, placa) VALUES(${tiempo},${i} ,${velocidad}, ${lugar}, '${placa}')"
+	"INSERT INTO infracciones_by_fecha (fecha ,velocidad, lugar, placa) VALUES(${tiempo} ,${velocidad}, ${lugar}, '${placa}')"
 );
 
 if ($velocidad > 80) {
@@ -51,6 +48,9 @@ if ($velocidad > 80) {
 	);
 	$batchCounter -> add(
 		"UPDATE infracciones_by_lugar SET infracciones = infracciones + 1 WHERE lugar = ${lugar}"
+	);
+	$batch -> add(
+		"INSERT INTO infracciones_in_rango (placa ,velocidad, fecha, lugar) VALUES('${placa}', ${velocidad}, ${tiempo}, ${lugar})"
 	);
 }
 

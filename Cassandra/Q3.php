@@ -44,8 +44,7 @@
 $time_start = microtime(true); // Tiempo Inicial Proceso
 $rows = "SELECT fecha, placa, velocidad 
 		 FROM datos_by_lugar
-		 where  fecha > '${feconsulta}' and fecha < '${felimite}' and lugar = ${lugar}
-		 ALLOW FILTERING;";
+		 where lugar = ${lugar} and fecha > '${feconsulta}' and fecha < '${felimite}' ;";
 $statement = new Cassandra\SimpleStatement($rows);
 $result    = $session->execute($statement);
 

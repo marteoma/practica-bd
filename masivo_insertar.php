@@ -48,7 +48,7 @@
 </tr>
 <?php
 $time_start = microtime(true); // Tiempo Inicial Proceso
-$clave= 0;
+
 	/*Ciclo*/
 	for( $i= 1 ; $i <= $registros ; $i++ ) {	
 		/*Genera los valores de forma aleatoria*/
@@ -56,21 +56,19 @@ $clave= 0;
 		$placa = $listaPlacas[ rand ( 0 , $nroPlacas ) ];
 		$tiempo = $tiempo + rand ( 0 , 1 );
 		$velocidad = rand ( 30 , 90 );
-		$id = $clave + $i;	
 		/*Arma la cadena del llamado*/
 		$url = 		$URL_HOME .
 					$bd . '/insertar.php'.
 					'?lugar='. $lugar .
 					'&placa='. $placa .
 					'&tiempo='. $tiempo .
-					'&id='.$id.
 					'&velocidad='. $velocidad;
 		/*Se hace el llamado*/			
 		$contents = file_get_contents( $url );
 		/*Se imprime la fila de la tabla*/
 		echo "<tr><td>$i</td><td>".$url . "</td><td>" . $contents . "</td></tr>\n";
 	}
-	$clave ++;
+	;
 ?>
 </table>
 </div>

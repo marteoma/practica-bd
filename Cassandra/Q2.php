@@ -46,8 +46,7 @@
 $time_start = microtime(true); // Tiempo Inicial Proceso
 $rows = "SELECT lugar, pasos 
 		 FROM pasos_by_mes 
-		 where    placa = '${placa}' and fecha > '${timestamp}' and fecha < '${timestampf}'
-		 ALLOW FILTERING;";
+		 where    placa = '${placa}' and fecha > '${timestamp}' and fecha < '${timestampf}' group by placa;";
 
 $statement = new Cassandra\SimpleStatement($rows);
 $result    = $session->execute($statement);
