@@ -11,10 +11,10 @@ date_default_timezone_set('America/Bogota');
 /*Se recuperan los argumentos*/
 $lugar		= htmlspecialchars($_GET["lugar"]);
 $placa		= htmlspecialchars($_GET["placa"]);
-$tiempo		= htmlspecialchars($_GET["tiempo"]);
+$tiempo		= htmlspecialchars($_GET["tiempo"])*1000;
 $velocidad	= htmlspecialchars($_GET["velocidad"]);
 $fechaftimestamp = date($tiempo);
-$f = date('Y/m',$fechaftimestamp);
+$f = date('Y/m',$fechaftimestamp/1000);
 
 //$registros = htmlspecialchars($_GET["registros"]);
 //include 'masivo_insertar.php';
@@ -33,7 +33,7 @@ $session = $cluster->connect("practica_bd");
 $batchCounter = new Cassandra\BatchStatement(Cassandra::BATCH_COUNTER);
 $batch = new Cassandra\BatchStatement(Cassandra::BATCH_UNLOGGED);
 
-if ($velocidad > 80) {
+if ($velocidad >= 80) {
 	$batchCounter -> add(
 		"UPDATE infracciones_by_placa SET infracciones = infracciones + 1 WHERE placa = '${placa}'"
 	);
