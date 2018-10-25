@@ -11,9 +11,11 @@ date_default_timezone_set('America/Bogota');
 /*Se recuperan los argumentos*/
 $lugar		= htmlspecialchars($_GET["lugar"]);
 $placa		= htmlspecialchars($_GET["placa"]);
-$tiempo		= htmlspecialchars($_GET["tiempo"])*1000;
+$tiempo		= htmlspecialchars($_GET["tiempo"]);
 $velocidad	= htmlspecialchars($_GET["velocidad"]);
-echo $tiempo;
+$fechaftimestamp = date($tiempo);
+$f = date('Y/m',$fechaftimestamp);
+echo $f;
 //$registros = htmlspecialchars($_GET["registros"]);
 //include 'masivo_insertar.php';
 //include 'http://localhost:9090/practica-bd/masivo_insertar.php?$registros';
@@ -36,7 +38,7 @@ $batch -> add(
 );
 
 $batchCounter -> add(
-	"UPDATE pasos_by_mes SET pasos = pasos + 1 WHERE placa = '${placa}' AND fecha = ${tiempo} AND lugar = ${lugar}"
+	"UPDATE pasos_by_mes SET pasos = pasos + 1 WHERE mes ='${f}' AND placa = '${placa}' AND lugar = ${lugar}"
 );
 $batch -> add(
 	"INSERT INTO infracciones_by_fecha (fecha ,velocidad, lugar, placa) VALUES(${tiempo} ,${velocidad}, ${lugar}, '${placa}')"

@@ -17,11 +17,8 @@
                ->withContactPoints('127.0.0.1')
                ->build();
 	 $session   = $cluster->connect("practica_bd");	
-	 $mess = $mes + 1;
-	 $fecha = $año.'-'.$mes;
-	 $fechalim = $año.'-'.$mess;
-	 $timestamp = strtotime($fecha)*1000;
-	 $timestampf = strtotime($fechalim)*1000;
+	 $fecha = $año.'/'.$mes;
+
 	
 	 
 /*Formato en HTML*/
@@ -46,7 +43,7 @@
 $time_start = microtime(true); // Tiempo Inicial Proceso
 $rows = "SELECT lugar, pasos 
 		 FROM pasos_by_mes 
-		 where    placa = '${placa}' and fecha > '${timestamp}' and fecha < '${timestampf}';";
+		 where    placa = '${placa}' and mes = '${fecha}';";
 
 $statement = new Cassandra\SimpleStatement($rows);
 $result    = $session->execute($statement);

@@ -7,7 +7,7 @@ CREATE TABLE infracciones_in_rango (placa TEXT, velocidad INT, fecha TIMESTAMP, 
 /* SELECT fecha, lugar FROM infracciones_in_rango WHERE placa=? and velocidad=? and fecha>?; */
 
 // Q2:
-CREATE TABLE pasos_by_mes (placa TEXT, fecha TIMESTAMP, lugar INT, pasos COUNTER, PRIMARY KEY ((placa),fecha,lugar)) WITH CLUSTERING ORDER BY (lugar ASC);
+CREATE TABLE pasos_by_mes (mes TEXT, placa TEXT, lugar INT, pasos COUNTER, PRIMARY KEY ((mes,placa),lugar)) WITH CLUSTERING ORDER BY (lugar ASC);
 
 /* SELECT lugares_lugar, lugares_lugar FROM pasos_by_mes WHERE fecha=? and placa=? ORDER BY lugares_lugar ASC; */
 
