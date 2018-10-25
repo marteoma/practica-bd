@@ -15,7 +15,7 @@ $tiempo		= htmlspecialchars($_GET["tiempo"]);
 $velocidad	= htmlspecialchars($_GET["velocidad"]);
 $fechaftimestamp = date($tiempo);
 $f = date('Y/m',$fechaftimestamp);
-echo $f;
+
 //$registros = htmlspecialchars($_GET["registros"]);
 //include 'masivo_insertar.php';
 //include 'http://localhost:9090/practica-bd/masivo_insertar.php?$registros';
@@ -33,17 +33,6 @@ $session = $cluster->connect("practica_bd");
 $batchCounter = new Cassandra\BatchStatement(Cassandra::BATCH_COUNTER);
 $batch = new Cassandra\BatchStatement(Cassandra::BATCH_UNLOGGED);
 
-$batch -> add(
-	"INSERT INTO datos_by_lugar (fecha, lugar,placa, velocidad) VALUES(${tiempo}, ${lugar}, '${placa}', ${velocidad})"
-);
-
-$batchCounter -> add(
-	"UPDATE pasos_by_mes SET pasos = pasos + 1 WHERE mes ='${f}' AND placa = '${placa}' AND lugar = ${lugar}"
-);
-$batch -> add(
-	"INSERT INTO infracciones_by_fecha (fecha ,velocidad, lugar, placa) VALUES(${tiempo} ,${velocidad}, ${lugar}, '${placa}')"
-);
-
 if ($velocidad > 80) {
 	$batchCounter -> add(
 		"UPDATE infracciones_by_placa SET infracciones = infracciones + 1 WHERE placa = '${placa}'"
@@ -53,6 +42,16 @@ if ($velocidad > 80) {
 	);
 	$batch -> add(
 		"INSERT INTO infracciones_in_rango (placa ,velocidad, fecha, lugar) VALUES('${placa}', ${velocidad}, ${tiempo}, ${lugar})"
+	);
+	$batch -> add(
+		"INSERT INTO datos_by_lugar (fecha, lugar,placa, velocidad) VALUES(${tiempo}, ${lugar}, '${placa}', ${velocidad})"
+	);
+	
+	$batchCounter -> add(
+		"UPDATE pasos_by_mes SET pasos = pasos + 1 WHERE mes ='${f}' AND placa = '${placa}' AND lugar = ${lugar}"
+	);
+	$batch -> add(
+		"INSERT INTO infracciones_by_fecha (fecha ,velocidad, lugar, placa) VALUES(${tiempo} ,${velocidad}, ${lugar}, '${placa}')"
 	);
 }
 
