@@ -41,10 +41,7 @@ $time_start = microtime(true); // Tiempo Inicial Proceso
 		'pipeline' => [
 			[
 				'$match' => [
-					'lugar' => $lugar,
-					'velocidad' => [
-						'$gt' => 80
-					]
+					'lugar' => $lugar
 				]
 			],
 			[

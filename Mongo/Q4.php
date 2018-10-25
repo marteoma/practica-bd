@@ -41,9 +41,6 @@
 		'fecha' => [
 			'$gte' => strtotime($fecha),
 			'$lt' => (strtotime($fecha)+86400),
-		],
-		'velocidad' => [
-			'$gt' => 80
 		]
 	]);
 

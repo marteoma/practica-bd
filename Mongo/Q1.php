@@ -43,11 +43,8 @@
 	$query = new MongoDB\Driver\Query([
 		'placa' => $placa, 
 		'fecha' => [
-			'$gt' => strtotime($fedesde),
+			'$gte' => strtotime($fedesde),
 			'$lt' => strtotime($fehasta),
-		],
-		'velocidad' => [
-			'$gt' => 80
 		]
 	]);
 

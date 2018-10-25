@@ -40,10 +40,7 @@
 		'pipeline' => [
 			[
 				'$match' => [
-					'placa' => $placa,
-					'velocidad' => [
-						'$gt' => 80
-					]
+					'placa' => $placa
 				]
 			],
 			[

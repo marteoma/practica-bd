@@ -53,7 +53,7 @@ $time_start = microtime(true); // Tiempo Inicial Proceso
 			],
 			[
 				'$group' => [
-					'_id' => '$lugar', 
+					'_id' => '$lugar',
 					'pasos' => ['$sum' => 1]
 				]
 			]
