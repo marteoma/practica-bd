@@ -21,7 +21,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Consulta Q6</title>
-	<link rel="stylesheet" type="text/css" href="../css/home.css">
+	<link rel="stylesheet" type="text/css" href="../home.css">
 </head>
 <body>
 <H1 class="blue">Consulta Q6 para MySQL</H1>
@@ -35,17 +35,12 @@
 </tr>
 <?php
 		$time_start = microtime(true); // Tiempo Inicial Proceso
-		
-		$rows = $conn ->query("SELECT lugares_lugar lugar, count(lugares_lugar) cantidad
-							FROM fotodetecciones
-							WHERE lugares_lugar = '${lugar}' AND velocidad > 80
-							GROUP BY lugar;");
+		$query = "SELECT lugares_lugar lugar, count(lugares_lugar) cantidad
+		FROM fotodetecciones
+		WHERE lugares_lugar = '${lugar}' AND velocidad > 80
+		GROUP BY lugar;";		
+		$rows = $conn ->query($query);
 	
-	/*	
-	$rows = $conn -> query("SELECT TIME(fecha) hora, vehiculos_placa placa, velocidad
-	FROM fotodetecciones");
-*/
-echo $conn -> error;	
 if (is_array($rows) || is_object($rows))
 {
 	foreach ($rows as $row) {	

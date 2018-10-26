@@ -27,7 +27,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Consulta Q3</title>
-	<link rel="stylesheet" type="text/css" href="../css/home.css">
+	<link rel="stylesheet" type="text/css" href="../home.css">
 </head>
 <body>
 <H1 class="blue">Consulta Q3 para Cassandra</H1>
@@ -45,6 +45,7 @@ $time_start = microtime(true); // Tiempo Inicial Proceso
 $rows = "SELECT fecha, placa, velocidad 
 		 FROM datos_by_lugar
 		 where lugar = ${lugar} and fecha > '${feconsulta}' and fecha < '${felimite}' ;";
+
 $statement = new Cassandra\SimpleStatement($rows);
 $result    = $session->execute($statement);
 

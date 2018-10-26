@@ -24,7 +24,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Consulta Q1</title>
-	<link rel="stylesheet" type="text/css" href="../css/home.css">
+	<link rel="stylesheet" type="text/css" href="../home.css">
 </head>
 <body>
 <H1 class="blue">Consulta Q1 para Mongo</H1>
@@ -47,7 +47,7 @@
 			'$lt' => strtotime($fehasta),
 		]
 	]);
-
+	
 	$rows = $mongo -> executeQuery('practica_bd.fotodetecciones', $query);
 	
 	foreach($rows as $row) {

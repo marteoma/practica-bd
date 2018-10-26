@@ -20,7 +20,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Consulta Q4</title>
-	<link rel="stylesheet" type="text/css" href="../css/home.css">
+	<link rel="stylesheet" type="text/css" href="../home.css">
 </head>
 <body>
 <H1 class="blue">Consulta Q4 para MySQL</H1>
@@ -34,12 +34,13 @@
     <th>Placa</th>
 </tr>
 <?php
-$time_start = microtime(true); // Tiempo Inicial Proceso
+		$time_start = microtime(true); // Tiempo Inicial Proceso
 
-		$rows = $conn -> query("SELECT TIME(fecha) hora, lugares_lugar lugar, vehiculos_placa placa
-		FROM fotodetecciones
-		WHERE DATE(fecha) = '${fecha}' AND velocidad > 80");
+		$query = "SELECT TIME(fecha) hora, lugares_lugar lugar, vehiculos_placa placa
+			FROM fotodetecciones
+			WHERE DATE(fecha) = '${fecha}' AND velocidad > 80";
 
+		$rows = $conn -> query($query);		
 		
 		foreach ($rows as $row) {	
 		?>

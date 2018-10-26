@@ -26,7 +26,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Consulta Q4</title>
-	<link rel="stylesheet" type="text/css" href="../css/home.css">
+	<link rel="stylesheet" type="text/css" href="../home.css">
 </head>
 <body>
 <H1 class="blue">Consulta Q4 para Cassandra</H1>
@@ -41,10 +41,11 @@
 </tr>
 <?php
 $time_start = microtime(true); // Tiempo Inicial Proceso
-$rows = "SELECT fecha,lugar, placa 
+$rows = "SELECT fecha, lugar, placa 
 		 FROM infracciones_by_fecha
-		 where  fecha > '${feconsulta}' and fecha < '${felimite}'
-		 ALLOW FILTERING;";
+		 where  fecha > '${feconsulta}' and fecha < '${felimite}'";
+echo $rows;
+	
 $statement = new Cassandra\SimpleStatement($rows);
 $result    = $session->execute($statement);
 	/*Ciclo*/
