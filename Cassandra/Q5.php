@@ -47,7 +47,7 @@ $result    = $session->execute($statement);
 		/*Se imprime la fila de la tabla*/
 		?>
 		 <tr>
-		 	<
+		 	
 		 	<td><?php echo $row['placa']; ?></td>
 		 	<td><?php echo $row['infracciones']; ?></td>
 		 </tr>

@@ -41,7 +41,7 @@ if ($velocidad >= 80) {
 		"UPDATE infracciones_by_lugar SET infracciones = infracciones + 1 WHERE lugar = ${lugar}"
 	);
 	$batch -> add(
-		"INSERT INTO infracciones_in_rango (placa ,velocidad, fecha, lugar) VALUES('${placa}', ${velocidad}, ${tiempo}, ${lugar})"
+		"INSERT INTO infracciones_in_rango (placa, fecha, lugar) VALUES('${placa}', ${tiempo}, ${lugar})"
 	);
 	$batch -> add(
 		"INSERT INTO datos_by_lugar (fecha, lugar,placa, velocidad) VALUES(${tiempo}, ${lugar}, '${placa}', ${velocidad})"
@@ -51,7 +51,7 @@ if ($velocidad >= 80) {
 		"UPDATE pasos_by_mes SET pasos = pasos + 1 WHERE mes ='${f}' AND placa = '${placa}' AND lugar = ${lugar}"
 	);
 	$batch -> add(
-		"INSERT INTO infracciones_by_fecha (id,fecha ,velocidad, lugar, placa) VALUES(1,${tiempo} ,${velocidad}, ${lugar}, '${placa}')"
+		"INSERT INTO infracciones_by_fecha (id,fecha, lugar, placa) VALUES(1,${tiempo} , ${lugar}, '${placa}')"
 	);
 }
 

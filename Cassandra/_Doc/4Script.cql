@@ -2,25 +2,24 @@ CREATE KEYSPACE practica_bd WITH replication = {'class':'SimpleStrategy', 'repli
 USE practica_bd;
 
 // Q1:
-CREATE TABLE infracciones_in_rango (placa TEXT, velocidad INT, fecha TIMESTAMP, lugar INT, PRIMARY KEY ((placa),fecha)) WITH CLUSTERING ORDER BY (fecha ASC);
+CREATE TABLE infracciones_in_rango (placa TEXT, fecha TIMESTAMP, lugar INT, PRIMARY KEY ((placa),fecha)) WITH CLUSTERING ORDER BY (fecha ASC);
 
-/* SELECT fecha, lugar FROM infracciones_in_rango WHERE placa=? and velocidad=? and fecha>?; */
+/* SELECT fecha, lugar FROM infracciones_in_rango WHERE placa=? and fecha>? ORDER BY fecha ASC; */
 
 // Q2:
 CREATE TABLE pasos_by_mes (mes TEXT, placa TEXT, lugar INT, pasos COUNTER, PRIMARY KEY ((mes,placa),lugar)) WITH CLUSTERING ORDER BY (lugar ASC);
 
-/* SELECT lugares_lugar, lugares_lugar FROM pasos_by_mes WHERE fecha=? and placa=? ORDER BY lugares_lugar ASC; */
+/* SELECT lugares_lugar, lugares_lugar FROM pasos_by_mes WHERE placa=? and fecha=? ORDER BY lugares_lugar ASC; */
 
 // Q3:
 CREATE TABLE datos_by_lugar (fecha TIMESTAMP, lugar INT, placa TEXT, velocidad INT, PRIMARY KEY ((lugar),fecha)) WITH CLUSTERING ORDER BY (fecha ASC);
 
-
-/* SELECT fecha, placa, velocidad FROM datos_by_lugar WHERE fecha=? and lugar=?; */
+/* SELECT fecha, placa, velocidad FROM datos_by_lugar WHERE lugar=? and fecha>?; */
 
 // Q4:
-CREATE TABLE infracciones_by_fecha (id INT,fecha TIMESTAMP, velocidad INT, lugar INT, placa TEXT, PRIMARY KEY ((id),fecha)) WITH CLUSTERING ORDER BY (fecha ASC);
+CREATE TABLE infracciones_by_fecha (id INT, fecha TIMESTAMP, lugar INT, placa TEXT, PRIMARY KEY ((id),fecha)) WITH CLUSTERING ORDER BY (fecha ASC);
 
-/* SELECT lugar, placa FROM infracciones_by_fecha WHERE fecha=? and velocidad>?; */
+/* SELECT fecha, lugar, placa FROM infracciones_by_fecha WHERE dummy=? and fecha>?; */
 
 // Q5:
 CREATE TABLE infracciones_by_placa (placa TEXT, infracciones COUNTER, PRIMARY KEY (placa));
