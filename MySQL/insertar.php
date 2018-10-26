@@ -35,8 +35,9 @@ $sql = "INSERT INTO fotodetecciones (fecha, velocidad, vehiculos_placa, lugares_
 
 
 /* ==--> insertar el o los registros*/
-
-$conn->query($sql);
+if($velocidad>=80){
+	$conn->query($sql);
+}
 $conn->close();
 /*retornar el texto con resultado*/
 echo "OK";

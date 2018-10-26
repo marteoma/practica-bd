@@ -13,8 +13,8 @@
 	 $placa = htmlspecialchars($_GET["placa"]);
 	 $fedesde = htmlspecialchars($_GET["fedesde"]);
 	 $fehasta = htmlspecialchars($_GET["fehasta"]);
-	 $fdesde = strtotime($fedesde)*1000;
-	 $fhasta = strtotime($fehasta)*1000;
+	 $fdesde =  strtotime($fedesde)*1000;
+	 $fhasta =  strtotime($fehasta)*1000;
 	 $cluster   = Cassandra::cluster()
                ->withContactPoints('127.0.0.1')
                ->build();

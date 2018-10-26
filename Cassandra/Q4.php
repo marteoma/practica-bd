@@ -43,8 +43,7 @@
 $time_start = microtime(true); // Tiempo Inicial Proceso
 $rows = "SELECT fecha,lugar, placa 
 		 FROM infracciones_by_fecha
-		 where  fecha > '${feconsulta}' and fecha < '${felimite}'
-		 ALLOW FILTERING;";
+		 where  fecha > '${feconsulta}' and fecha < '${felimite}';";
 $statement = new Cassandra\SimpleStatement($rows);
 $result    = $session->execute($statement);
 	/*Ciclo*/
