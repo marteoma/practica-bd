@@ -1,0 +1,28 @@
+Q1 - Dada el vehículo(placas) y rango de fechas, se puede consultar las infracciones (mas de 80km). Listando fecha, hora, lugar.
+
+
+
+
+Q2 - ada el año, mes y el vehículo(placas), se puede consultar las estadísticas de total de pasos por cada lugar. Listando lugar y número de pasadas (Note que este es un consolidado mensual).
+
+
+
+
+Q3 - Dada una fecha y lugar se puede consultar las horas del día, vehículo(placas) y velocidad
+
+
+
+
+Q4 - Dado una fecha se puede consultar los vehículos(placas) que sobrepasaron 80km, listando hora del día, lugar y placa.
+
+
+
+
+Q5 - Dada una placa se puede consultar la cantidad de infracciones.
+
+
+
+
+Q6 - Dada una zona la cantidad de infracciones que hay en esa zona.
+
+

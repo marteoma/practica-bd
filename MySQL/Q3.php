@@ -24,7 +24,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Consulta Q3</title>
-	<link rel="stylesheet" type="text/css" href="../css/home.css">
+	<link rel="stylesheet" type="text/css" href="../home.css">
 </head>
 <body>
 <H1 class="blue">Consulta Q3 para MySQL</H1>
@@ -39,11 +39,11 @@
 <?php
 	$time_start = microtime(true); // Tiempo Inicial Proceso
 
-	$rows = $conn -> query("SELECT TIME(fecha) hora, vehiculos_placa placa, velocidad
-		FROM fotodetecciones
-		WHERE DATE(fecha) > ${fecha} AND DATE(fecha) < '${fecha}'+ INTERVAL 1 DAY AND lugares_lugar = ${lugar}");
+	$query = "SELECT TIME(fecha) hora, vehiculos_placa placa, velocidad
+	FROM fotodetecciones
+	WHERE DATE(fecha) > ${fecha} AND DATE(fecha) < '${fecha}'+ INTERVAL 1 DAY AND lugares_lugar = ${lugar}";
+	$rows = $conn -> query($query);
 
-	echo $conn -> error;	
 	
 	foreach ($rows as $row) {	
 	?>

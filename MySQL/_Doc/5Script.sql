@@ -13,4 +13,14 @@ INSERT INTO vehiculos (placa) VALUES ('AAA111'),
 				     ('AAA555'),
 				     ('BBB555'),
 				     ('CCC555');
-				     
+
+INSERT INTO lugares (lugar) VALUES(0),
+			   (1),
+			   (2),
+			   (3),
+			   (4),
+			   (5),
+			   (6),
+			   (7),
+			   (8),
+			   (9);

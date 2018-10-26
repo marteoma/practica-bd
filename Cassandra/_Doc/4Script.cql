@@ -1,5 +1,5 @@
 CREATE KEYSPACE practica_bd WITH replication = {'class':'SimpleStrategy', 'replication_factor':1};
-USE practica_bd_cql;
+USE practica_bd;
 
 // Q1:
 CREATE TABLE infracciones_in_rango (placa TEXT, velocidad INT, fecha TIMESTAMP, lugar INT, PRIMARY KEY ((placa),fecha)) WITH CLUSTERING ORDER BY (fecha ASC);
@@ -18,7 +18,7 @@ CREATE TABLE datos_by_lugar (fecha TIMESTAMP, lugar INT, placa TEXT, velocidad I
 /* SELECT fecha, placa, velocidad FROM datos_by_lugar WHERE fecha=? and lugar=?; */
 
 // Q4:
-CREATE TABLE infracciones_by_fecha (fecha TIMESTAMP, velocidad INT, lugar INT, placa TEXT, PRIMARY KEY ((fecha),velocidad)) WITH CLUSTERING ORDER BY (velocidad ASC);
+CREATE TABLE infracciones_by_fecha (id INT,fecha TIMESTAMP, velocidad INT, lugar INT, placa TEXT, PRIMARY KEY ((id),fecha)) WITH CLUSTERING ORDER BY (fecha ASC);
 
 /* SELECT lugar, placa FROM infracciones_by_fecha WHERE fecha=? and velocidad>?; */
 

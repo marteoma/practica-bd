@@ -51,7 +51,7 @@ if ($velocidad >= 80) {
 		"UPDATE pasos_by_mes SET pasos = pasos + 1 WHERE mes ='${f}' AND placa = '${placa}' AND lugar = ${lugar}"
 	);
 	$batch -> add(
-		"INSERT INTO infracciones_by_fecha (fecha ,velocidad, lugar, placa) VALUES(${tiempo} ,${velocidad}, ${lugar}, '${placa}')"
+		"INSERT INTO infracciones_by_fecha (id,fecha ,velocidad, lugar, placa) VALUES(1,${tiempo} ,${velocidad}, ${lugar}, '${placa}')"
 	);
 }
 

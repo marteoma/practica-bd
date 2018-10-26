@@ -22,7 +22,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Consulta Q5</title>
-	<link rel="stylesheet" type="text/css" href="../css/home.css">
+	<link rel="stylesheet" type="text/css" href="../home.css">
 </head>
 <body>
 <H1 class="blue">Consulta Q5 para Cassandra</H1>

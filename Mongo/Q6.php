@@ -21,7 +21,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Consulta Q6</title>
-	<link rel="stylesheet" type="text/css" href="../css/home.css">
+	<link rel="stylesheet" type="text/css" href="../home.css">
 </head>
 <body>
 <H1 class="blue">Consulta Q6 para Mongo</H1>
@@ -41,10 +41,7 @@ $time_start = microtime(true); // Tiempo Inicial Proceso
 		'pipeline' => [
 			[
 				'$match' => [
-					'lugar' => $lugar,
-					'velocidad' => [
-						'$gt' => 80
-					]
+					'lugar' => $lugar
 				]
 			],
 			[

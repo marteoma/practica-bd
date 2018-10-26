@@ -1,0 +1,41 @@
+Q1 - Dada el vehículo(placas) y rango de fechas, se puede consultar las infracciones (mas de 80km). Listando fecha, hora, lugar.
+
+SELECT DATE_FORMAT(fecha, '%y/%m/%d') fecha, DATE_FORMAT(fecha, '%H:%i:%s') hora, lugares_lugar 
+FROM fotodetecciones 
+WHERE fecha > '2018/10/01' AND fecha < '2018/11/01' AND velocidad > 80 AND vehiculos_placa = 'AAA111'
+
+
+Q2 - ada el año, mes y el vehículo(placas), se puede consultar las estadísticas de total de pasos por cada lugar. Listando lugar y número de pasadas (Note que este es un consolidado mensual).
+
+SELECT lugares_lugar, COUNT(*) pasadas 
+FROM fotodetecciones 
+WHERE fecha >= '2018/10/01' AND fecha < '2018/11/01' AND vehiculos_placa = 'AAA111' 
+GROUP BY lugares_lugar
+
+
+Q3 - Dada una fecha y lugar se puede consultar las horas del día, vehículo(placas) y velocidad
+
+SELECT TIME(fecha) hora, vehiculos_placa placa, velocidad 
+FROM fotodetecciones 
+WHERE DATE(fecha) > 2018/10/01 AND DATE(fecha) < '2018/10/01'+ INTERVAL 1 DAY AND lugares_lugar = 1
+
+
+Q4 - Dado una fecha se puede consultar los vehículos(placas) que sobrepasaron 80km, listando hora del día, lugar y placa.
+
+SELECT TIME(fecha) hora, lugares_lugar lugar, vehiculos_placa placa 
+FROM fotodetecciones 
+WHERE DATE(fecha) = '2018/10/01' AND velocidad > 80
+
+
+Q5 - Dada una placa se puede consultar la cantidad de infracciones.
+
+SELECT vehiculos_placa placa, count(*) cantidad 
+FROM fotodetecciones 
+WHERE vehiculos_placa = 'AAA111' AND velocidad > 80 GROUP BY placa
+
+
+Q6 - Dada una zona la cantidad de infracciones que hay en esa zona.
+
+SELECT lugares_lugar lugar, count(lugares_lugar) cantidad 
+FROM fotodetecciones 
+WHERE lugares_lugar = '1' AND velocidad > 80 GROUP BY lugar

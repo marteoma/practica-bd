@@ -26,7 +26,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Consulta Q2</title>
-	<link rel="stylesheet" type="text/css" href="../css/home.css">
+	<link rel="stylesheet" type="text/css" href="../home.css">
 </head>
 <body>
 <H1 class="blue">Consulta Q2 para MySQL</H1>
@@ -40,11 +40,13 @@
 <?php
 	$time_start = microtime(true); // Tiempo Inicial Proceso
 	$nmes = $mes + 1;
-	$rows = $conn -> query("SELECT lugares_lugar, COUNT(*) pasadas FROM fotodetecciones
-		WHERE fecha >= '${año}/${mes}/01' AND fecha < '${año}/${nmes}/01'
+	$query = "SELECT lugares_lugar, COUNT(*) pasadas 
+	FROM fotodetecciones
+	WHERE fecha >= '${año}/${mes}/01' AND fecha < '${año}/${nmes}/01'
 		AND vehiculos_placa = '${placa}'
-		GROUP BY lugares_lugar");
-
+	GROUP BY lugares_lugar";
+	$rows = $conn -> query($query);
+	
 	foreach ($rows as $row) {	
 	?>
 		<tr>

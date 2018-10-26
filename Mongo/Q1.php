@@ -24,7 +24,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Consulta Q1</title>
-	<link rel="stylesheet" type="text/css" href="../css/home.css">
+	<link rel="stylesheet" type="text/css" href="../home.css">
 </head>
 <body>
 <H1 class="blue">Consulta Q1 para Mongo</H1>
@@ -43,14 +43,11 @@
 	$query = new MongoDB\Driver\Query([
 		'placa' => $placa, 
 		'fecha' => [
-			'$gt' => strtotime($fedesde),
+			'$gte' => strtotime($fedesde),
 			'$lt' => strtotime($fehasta),
-		],
-		'velocidad' => [
-			'$gt' => 80
 		]
 	]);
-
+	
 	$rows = $mongo -> executeQuery('practica_bd.fotodetecciones', $query);
 	
 	foreach($rows as $row) {

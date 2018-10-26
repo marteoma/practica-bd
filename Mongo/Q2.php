@@ -22,7 +22,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Consulta Q2</title>
-	<link rel="stylesheet" type="text/css" href="../css/home.css">
+	<link rel="stylesheet" type="text/css" href="../home.css">
 </head>
 <body>
 <H1 class="blue">Consulta Q2 para Mongo</H1>
@@ -53,7 +53,7 @@ $time_start = microtime(true); // Tiempo Inicial Proceso
 			],
 			[
 				'$group' => [
-					'_id' => '$lugar', 
+					'_id' => '$lugar',
 					'pasos' => ['$sum' => 1]
 				]
 			]

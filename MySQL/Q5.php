@@ -20,7 +20,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Consulta Q5</title>
-	<link rel="stylesheet" type="text/css" href="../css/home.css">
+	<link rel="stylesheet" type="text/css" href="../home.css">
 </head>
 <body>
 <H1 class="blue">Consulta Q5 para MySQL</H1>
@@ -34,18 +34,16 @@
 </tr>
 <?php
 $time_start = microtime(true); // Tiempo Inicial Proceso
+$query = "SELECT vehiculos_placa placa, count(*) cantidad
+	FROM fotodetecciones
+	WHERE vehiculos_placa = '${placa}' AND velocidad > 80
+	GROUP BY placa;";
+$rows = $conn ->query($query);
 
-$rows = $conn ->query("SELECT vehiculos_placa placa, count(*) cantidad
-					   FROM fotodetecciones
-					   WHERE vehiculos_placa = '${placa}' AND velocidad > 80
-					   GROUP BY placa;");
-
-echo $conn -> error;
 
 foreach($rows as $row){
 	?>
 		<tr>
-		
 		<td><?php echo $row["placa"]; ?></td>
 		<td><?php echo $row["cantidad"]; ?></td>
 		</tr>
