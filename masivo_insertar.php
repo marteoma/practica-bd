@@ -35,7 +35,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Generación registros - NoSQL</title>
-	<link rel="stylesheet" type="text/css" href="css/home.css">
+	<link rel="stylesheet" type="text/css" href="home.css">
 </head>
 <body>
 <H1 class="blue">Insertar Masivo para <?=$bd;?>(registros:<?=$registros;?>)</H1>
@@ -50,7 +50,8 @@
 $time_start = microtime(true); // Tiempo Inicial Proceso
 
 	/*Ciclo*/
-	for( $i= 1 ; $i <= $registros ; $i++ ) {	
+	$i = 0;
+	while ($i < $registros) {	
 		/*Genera los valores de forma aleatoria*/
 		$lugar = rand ( 0 , 9 );
 		$placa = $listaPlacas[ rand ( 0 , $nroPlacas ) ];
@@ -63,12 +64,15 @@ $time_start = microtime(true); // Tiempo Inicial Proceso
 					'&placa='. $placa .
 					'&tiempo='. $tiempo .
 					'&velocidad='. $velocidad;
-		/*Se hace el llamado*/			
-		$contents = file_get_contents( $url );
-		/*Se imprime la fila de la tabla*/
-		echo "<tr><td>$i</td><td>".$url . "</td><td>" . $contents . "</td></tr>\n";
+		if ($velocidad >= 80) {
+			/*Se hace el llamado*/			
+			$contents = file_get_contents( $url );
+			/*Se imprime la fila de la tabla*/
+			echo "<tr><td>$i</td><td>".$url . "</td><td>" . $contents . "</td></tr>\n";
+			$i++;
+		}
 	}
-	;
+	
 ?>
 </table>
 </div>

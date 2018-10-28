@@ -1,0 +1,5 @@
+Se añadieron índices de la siguiente manera.
+
+ALTER TABLE `practica-bd`.`fotodetecciones`   
+  ADD  INDEX `index_lugar` (`lugares_lugar`),
+  ADD  INDEX `index_placa` (`vehiculos_placa`);

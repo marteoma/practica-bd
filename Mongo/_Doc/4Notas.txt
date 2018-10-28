@@ -1,0 +1,4 @@
+Se crearon los siguientes dos índices.
+
+db.collection.createIndex({ placa: 1 });
+db.collection.createIndex({ lugar: 1 });
