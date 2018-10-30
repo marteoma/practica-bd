@@ -2,3 +2,32 @@ Se crearon los siguientes dos índices.
 
 db.collection.createIndex({ placa: 1 });
 db.collection.createIndex({ lugar: 1 });
+
+La base de datos se validó con el siguiente esquema.
+
+db.createCollection("fotodetecciones", {
+   validator: {
+      $jsonSchema: {
+         bsonType: "object",
+         required: [ "fecha", "lugar", "placa", "velocidad"],
+         properties: {
+            fecha: {
+               bsonType: "int",
+               description: "Timestamp of the date, must be int and is required"
+            },
+            lugar: {
+               bsonType: "string",
+               description: "Identification of the place, must be string and is required"
+            },
+            placa: {
+               bsonType: "string",               
+               description: "Plate of the detection, must be string and is required"
+            },
+            velocidad: {
+               bsonType: "int",
+               description: "Speed of the car, must be int and is required"
+            }
+         }
+      }
+   }
+})
