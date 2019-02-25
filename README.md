@@ -1,6 +1,4 @@
-# Práctica de Técnicas Avanzadas en Bases de Datos
-
-### Instrucciones
+﻿### Instrucciones
 
 * Antes de empezar a trabajar asegurarse de tener el repositorio al día, sino hacer **git pull**
 * Para hacer un commit se hace lo siguiente
